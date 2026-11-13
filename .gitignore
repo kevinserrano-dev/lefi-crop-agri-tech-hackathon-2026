@@ -1,0 +1,81 @@
+# --- Secrets & local env ---
+.env
+.env.*
+!.env.example
+**/secrets.h
+# ESP32 board files hold a device password (firmware/esp32-node, ADR-063); only board.example.h is committed
+firmware/esp32-node/lefi_node/board_*.h
+deploy/mosquitto/passwd
+deploy/mosquitto/acl.local
+*.pem
+*.key
+
+# --- Runtime data (never commit real readings) ---
+data/*
+!data/.gitkeep
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+logs/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# --- JavaScript ---
+node_modules/
+.pnpm-store/
+.next/
+out/
+.expo/
+.turbo/
+*.tsbuildinfo
+coverage/
+
+# --- Flutter / Dart ---
+.dart_tool/
+.flutter-plugins-dependencies
+
+# --- Firmware ---
+firmware/**/.pio/
+firmware/**/.vscode/
+
+# --- Third-party vendored checkouts (fetched by scripts, not committed) ---
+simulators/robot-mh3/vendor/
+
+# --- OS / editors ---
+.DS_Store
+.idea/
+*.swp
+
+# --- Lefi Crop signing keys (ADR-027, ADR-035): private keys live in ~/.lefi-license and
+# ~/.lefi-release on the owner's Mac. Never commit them, even by mistake.
+.lefi-license/
+.lefi-release/
+signing.key
+release.key
+*.lefiupdate
+
+# --- Internal documentation stays on the owner's machines (not published) ---
+docs/
+*.md
+!/README.md
+!/THIRD_PARTY_NOTICES.md
+
+# --- Local tool folders at the root (editor/assistant settings); CI stays published ---
+/.*/
+!/.github/
+
+# --- Release binaries too large for git: attach them to the GitHub release instead ---
+release/ios/
+release/android/*universal.apk

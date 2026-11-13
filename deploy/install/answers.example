@@ -1,0 +1,61 @@
+# Lefi Crop AI — answers file for an unattended install (ADR-028):
+#   sudo ./scripts/install.sh --answers deploy/install/answers.example [--events ndjson]
+# KEY=VALUE, one per line; '#' starts a comment. Unknown keys are refused. A key that is left
+# out takes the default shown here (and the log says so). With an answers file the installer
+# never asks anything. Do not put passwords in this file: use ADMIN_PASSWORD_FILE.
+
+# Roles for this machine: ai, core, admin, robot, firmware, all (= ai,core,admin).
+ROLES=ai,core,admin
+
+# Linux only: systemd (system services as user `lefi`, start at boot, needs root — default)
+# or user (development: nothing installed system-wide, processes stop at reboot).
+SERVICE_MODE=systemd
+
+# Proceed after showing the plan (default yes).
+CONTINUE=yes
+
+# --- ai role -----------------------------------------------------------------------------
+# recommended (default) or a tag from config/supported-models.tsv. A model that cannot run
+# fully on this PC's GPU is refused (Lefi Crop requires the AI).
+MODEL=recommended
+# The Brain runs on ANOTHER machine → Ollama listens on the LAN (default yes when the core
+# role is not on this machine).
+AI_LAN=yes
+# Linux: run Ollama's official installer when Ollama is missing (default yes in systemd mode).
+INSTALL_OLLAMA=yes
+# Stop another Ollama server (desktop app, brew service, manual `ollama serve`) — default yes.
+STOP_FOREIGN_OLLAMA=yes
+# Check online for a newer copy of an already downloaded model (default no).
+UPDATE_MODEL=no
+
+# --- core role ---------------------------------------------------------------------------
+# AI node URL when this machine has no ai role. It must serve a supported model fully on its
+# GPU, otherwise the install stops (AI_NOT_VIABLE).
+AI_URL=http://192.168.8.20:11434
+# Bootstrap administrator password: a file whose first line is the password (min 10
+# characters, keep it chmod 600). Empty = a password is generated into credentials/admin.txt.
+ADMIN_PASSWORD_FILE=
+# Stop and disable a distribution service already running on a port Lefi Crop needs
+# (e.g. a pre-existing mosquitto.service). Default yes.
+STOP_VENDOR_SERVICES=yes
+
+# --- admin role --------------------------------------------------------------------------
+# Serve over HTTPS with Caddy's local CA (default no = plain HTTP on the isolated LAN).
+ADMIN_HTTPS=yes
+# ADMIN_HOSTNAME=lefi-main.local
+# Brain address when the core role is on another machine.
+# BRAIN_UPSTREAM=192.168.8.10:8000
+
+# --- macOS -------------------------------------------------------------------------------
+# Install Homebrew when it is missing (default yes).
+INSTALL_HOMEBREW=yes
+# Install the global `lefi` command (always done by a Linux system install). Default yes.
+INSTALL_CLI=yes
+
+# --- optional roles (user mode only) -----------------------------------------------------
+# ROBOT_DOWNLOAD=yes
+# ROBOT_SETUP=no
+# ROBOT_CPU=no
+
+# DEVELOPMENT / CI ONLY: continue when no viable AI exists. Never on a customer install.
+DEV_ALLOW_NO_AI=no

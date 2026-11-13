@@ -1,0 +1,84 @@
+.text {
+  margin: 4px 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.plain {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid var(--lefi-warn-dot, #e0a43a);
+  background: var(--lefi-warn-bg);
+  border-radius: var(--lefi-radius-md);
+}
+.review input {
+  height: 32px;
+  border: 1px solid var(--lefi-border-input, #cfd8d2);
+  border-radius: 8px;
+  padding: 0 10px;
+}
+.linkish {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--lefi-forest-800, #1f4d36);
+  cursor: pointer;
+}
+.stageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 6px 16px;
+}
+.small {
+  width: 64px;
+}
+.thresholds {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 12px;
+}
+.thresholds label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+.tableWrap {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--lefi-border-row, #eef2ef);
+  vertical-align: top;
+}
+.table th {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+  background: var(--lefi-surface-muted, #f6f8f7);
+}

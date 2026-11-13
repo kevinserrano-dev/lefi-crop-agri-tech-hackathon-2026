@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "device_id": "esp32-test",
+  "boot_id": "0a1b2c3d",
+  "profile": "lefi-node-esp32.v1",
+  "firmware": "0.4.0",
+  "mac": "02:00:00:00:00:01",
+  "origin": "LIVE",
+  "channels": [
+    { "sensor_key": "air-1", "detected": true },
+    { "sensor_key": "air-2", "detected": false },
+    { "sensor_key": "water-temp-1", "detected": true },
+    { "sensor_key": "water-temp-2", "detected": false, "detail": "ROM not set in firmware" }
+  ]
+}

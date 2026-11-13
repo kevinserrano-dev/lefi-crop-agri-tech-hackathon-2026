@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 42,
+  "uptime_ms": 120000,
+  "ts_synced": false,
+  "origin": "SIMULATED",
+  "readings": [
+    { "sensor_key": "air-1", "variable": "air_temperature", "value": 21.5 },
+    { "sensor_key": "air-1", "variable": "air_humidity", "value": 60 },
+    { "sensor_key": "soil-temp-1", "variable": "soil_temperature", "value": null, "error": "not_detected" }
+  ]
+}

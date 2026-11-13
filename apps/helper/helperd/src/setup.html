@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lefi Crop · this PC</title>
+<style>
+:root{--bg:#f6f8f4;--card:#fff;--ink:#14231d;--muted:#5b6a63;--faint:#8a9891;--green:#2e7d55;--green-strong:#1f5f3f;--line:#dfe6e0;--sunken:#eff3ee;
+--ok-bg:#e2f3e8;--ok:#1f6b45;--warn-bg:#fbefd4;--warn:#7f5400;--crit-bg:#fbe4e1;--crit:#a02c20;--info-bg:#e4eff7;--info:#1f5a85;--off-bg:#ebeeeb;--off:#59665f}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1815;--card:#16221d;--ink:#e6efe9;--muted:#9fb0a8;--faint:#73847c;--green:#4cae7d;--green-strong:#7bd0a3;--line:#26362f;--sunken:#101b17;
+--ok-bg:#163427;--ok:#7ed3a4;--warn-bg:#352a10;--warn:#efc873;--crit-bg:#3a1a17;--crit:#f2a79d;--info-bg:#15293a;--info:#93c6ee;--off-bg:#212c27;--off:#a3b1aa}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:880px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:25px;line-height:1.2;margin:0}
+h2{font-size:16px;margin:0}
+h3{font-size:13px;margin:16px 0 6px;color:var(--muted);font-weight:600}
+p{margin:6px 0}
+.muted{color:var(--muted)} .small{font-size:13px}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px}
+.grow{flex:1}
+code,pre,.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:650;white-space:nowrap}
+.ok{background:var(--ok-bg);color:var(--ok)} .warn{background:var(--warn-bg);color:var(--warn)}
+.crit{background:var(--crit-bg);color:var(--crit)} .info{background:var(--info-bg);color:var(--info)} .off{background:var(--off-bg);color:var(--off)}
+button{font:inherit;cursor:pointer;color:inherit}
+.btn{padding:5px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:13px;font-weight:600}
+.btn:hover{border-color:var(--green)}
+.btn:focus-visible,.comp:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.cmd{display:flex;gap:8px;align-items:flex-start;background:var(--sunken);border-radius:10px;padding:10px 12px;margin:8px 0}
+.cmd code{flex:1;min-width:0;word-break:break-all;white-space:pre-wrap}
+ol.wizard{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.wizard>li{counter-increment:s;position:relative;padding:0 0 18px 42px}
+ol.wizard>li:last-child{padding-bottom:0}
+ol.wizard>li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--ok-bg);color:var(--ok);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ol.wizard strong{display:block}
+ol.wizard>li.done::before{content:"✓"}
+ol.wizard>li.todo::before{background:var(--sunken);color:var(--muted)}
+input.code{font:600 18px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;width:190px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);margin-top:6px}
+.bar{height:8px;border-radius:99px;background:var(--sunken);overflow:hidden;margin:8px 0 4px}
+.bar>div{height:100%;background:var(--green);border-radius:99px;transition:width .3s}
+ol.steps{list-style:none;margin:10px 0 0;padding:0}
+ol.steps li{display:flex;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+.dot{flex:none;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+.dot.spinning{background:none;border:2.5px solid var(--line);border-top-color:var(--green);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.dot.spinning{animation-duration:2.4s}}
+.step-body{min-width:0;flex:1}
+.step-log{font-size:12.5px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+.problem{border-radius:10px;padding:12px 14px;margin:10px 0;background:var(--crit-bg);color:var(--crit)}
+.problem.warn{background:var(--warn-bg);color:var(--warn)} .problem.info{background:var(--info-bg);color:var(--info)}
+.problem strong{display:block}
+.problem .fix{margin-top:6px;color:var(--ink)}
+details{margin-top:10px}
+summary{cursor:pointer;font-weight:600;font-size:13.5px}
+pre.log{max-height:420px;overflow:auto;background:var(--sunken);border-radius:10px;padding:12px;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12.5px;line-height:1.45}
+.comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.comp{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-height:92px}
+.comp:hover{border-color:var(--green)}
+.comp[aria-expanded="true"]{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+.comp[data-dim="1"] .comp-title{color:var(--muted)}
+.comp-title{font-weight:650}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 18px;margin:8px 0}
+.kv div>span{display:block;font-size:12.5px;color:var(--muted)}
+.kv div>b{font-weight:600;overflow-wrap:anywhere}
+.big b{font-size:22px;font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:4px 0}
+th{text-align:left;font-weight:600;font-size:12.5px;color:var(--muted)}
+th,td{padding:5px 12px 5px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+tr:first-child th{border-top:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.tile-value{font-size:22px;font-weight:700;line-height:1.25;font-variant-numeric:tabular-nums}
+.spark{margin-top:8px}
+.spark svg{display:block;width:100%;height:56px;touch-action:none;cursor:crosshair}
+.spark .line{fill:none;stroke:var(--green);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.spark .area{fill:var(--green);opacity:.12;stroke:none}
+.spark .base{stroke:var(--line);stroke-width:1}
+.spark .cross{stroke:var(--muted);stroke-width:1}
+.spark-axis{display:flex;justify-content:space-between;gap:8px;margin-top:2px;font-size:11.5px}
+.spark-read{text-align:center;font-variant-numeric:tabular-nums}
+.history button{background:none;border:0;padding:0;text-decoration:underline;font-size:13.5px}
+@media (max-width:520px){.card{padding:14px}}
+</style>
+</head>
+<body>
+<main>
+  <div id="app"><p class="muted">Loading…</p></div>
+  <noscript><p>This page needs JavaScript. Join from Terminal: <code>curl -fsS http://__IP__:__HTTP__/setup/join.sh | sh -s -- YOUR-CODE</code></p></noscript>
+</main>
+<script>
+"use strict";
+const PAGE="__PAGE__",MAIN_IP="__IP__",HTTP_PORT="__HTTP__",INSTALLATION="__ID__",FP_SHORT="__FP_SHORT__";
+const COMP={ai:{t:"AI node",d:"Runs the AI model for Lefi Brain"},desktop:{t:"Lefi Desktop",d:"Dashboard for operators"},robot:{t:"Robot simulator",d:"Simulated robot, no physical control"},firmware:{t:"Firmware tools",d:"Builds the ESP32 firmware"}};
+const COMP_STATE={running:["Running","ok"],stopped:["Stopped","crit"],disabled:["Switched off","warn"],installed:["Installed","ok"],external:["Running, not managed","warn"],not_installed:["Not installed","off"]};
+const CMD_STATE={queued:["Waiting for this PC","info"],delivered:["Starting","info"],running:["In progress","info"],ok:["Finished","ok"],failed:["Failed","crit"],cancelled:["Cancelled and undone","warn"],expired:["Not started (expired)","off"]};
+const ACTION={start:"Start",stop:"Stop",restart:"Restart",off:"Kill switch: turn off",on:"Kill switch: turn on"};
+let hovering=false,me=null,lastKey="",selected=null,logCmd=null,logData=null,logOpen=false,stepsOpen=true,code="";
+
+function h(tag,props,...kids){const e=document.createElement(tag);for(const[k,v]of Object.entries(props||{})){
+  if(v===null||v===undefined||v===false)continue;
+  if(k==="class")e.className=v;else if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?"":v);}
+  for(const c of kids.flat()){if(c===null||c===undefined||c===false)continue;e.append(c.nodeType?c:String(c));}return e;}
+const tag=(t,c)=>h("span",{class:"tag "+c},t);
+const kv=(l,v,c)=>h("div",{class:c},h("span",null,l),h("b",null,v===null||v===undefined||v===""?"unknown":v));
+
+function copyText(text,btn){
+  const done=()=>{const o=btn.textContent;btn.textContent="Copied";setTimeout(()=>{btn.textContent=o},1500);};
+  // This page is plain HTTP on the LAN, where the Clipboard API does not exist.
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done);return;}
+  const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.append(t);t.select();
+  try{document.execCommand("copy");done();}catch(e){btn.textContent="Select and copy by hand";}t.remove();
+}
+const copyBtn=(text,label)=>{const b=h("button",{class:"btn",type:"button"},label||"Copy");b.addEventListener("click",()=>copyText(typeof text==="function"?text():text,b));return b;};
+const cmdBox=(text)=>h("div",{class:"cmd"},h("code",null,text),copyBtn(text));
+
+function agoText(s){if(s===null||s===undefined)return"never";if(s<60)return s+" s ago";if(s<3600)return Math.floor(s/60)+" min ago";return Math.floor(s/3600)+" h ago";}
+function upText(s){if(s===null||s===undefined)return"unknown";const d=Math.floor(s/86400),hh=Math.floor(s%86400/3600);return d?d+" d "+hh+" h":hh+" h "+Math.floor(s%3600/60)+" min";}
+function when(t){return t?new Date(t*1000).toLocaleString([], {dateStyle:"medium",timeStyle:"short"}):"unknown";}
+function cmdTitle(c){const k=c.kind;const roles=(c.roles||[]).map(r=>(COMP[r]||{t:r}).t).join(", ");
+  if(k==="rollback")return"Undo the installation";if(k==="remove")return"Remove "+roles;if(k==="ai_bench")return"AI speed test";
+  if(k==="service")return(ACTION[c.action]||c.action)+" the AI";
+  if(k==="update_service")return"Update the Lefi Crop Helper service"+(c.service_update?" to "+c.service_update.version:"");
+  if(k==="desktop_pair")return"Pair Lefi Desktop";if(k==="erase")return"Erase Lefi Crop";return(c.dry_run?"Preview: ":"Install ")+roles;}
+
+/* What the main PC can update here (ADR-062). Read-only: updates are started from the main PC. */
+function updatesCard(m){const u=m.updates||{};const sv=u.service,dk=u.desktop;if(!sv&&!dk)return null;
+  const rows=[];
+  if(sv)rows.push(h("li",null,h("strong",null,"Lefi Crop Helper service"),h("span",{class:"muted"}," "+sv.installed+" → "+sv.available)));
+  if(dk)rows.push(h("li",null,h("strong",null,"Lefi Desktop"),h("span",{class:"muted"}," "+dk.installed+" → "+dk.available)));
+  const out=[h("div",{class:"problem info"},h("strong",null,"Updates are available for this PC"),h("ul",null,rows),
+    h("div",{class:"fix"},"Install them from the main PC: Lefi Crop Helper → Apps → "+(m.name||"this PC")+".")) ];
+  if(sv&&!sv.remote)out.push(h("p",{class:"muted small"},"This PC's service is too old to update itself. Once, open Terminal on this PC and run (macOS asks for its password once; after that every update comes from the main PC):"),
+    cmdBox("curl -fsS http://"+MAIN_IP+":"+HTTP_PORT+"/setup/update.sh | sh"));
+  return h("div",{class:"card"},out);}
+
+/* ---- not joined: the guided steps ---- */
+function joinCommand(){const c=code.trim().toUpperCase()||"XXXX-XXXX";return"curl -fsS http://"+MAIN_IP+":"+HTTP_PORT+"/setup/join.sh | sh -s -- "+c;}
+function viewJoin(){
+  const cmd=h("code",null,joinCommand());
+  const input=h("input",{class:"code",placeholder:"XXXX-XXXX","aria-label":"One-time code",maxlength:"9",autocomplete:"off",spellcheck:"false",value:code,
+    oninput:e=>{code=e.target.value;cmd.textContent=joinCommand();}});
+  return[h("div",{class:"head"},h("h1",null,"Add this PC to Lefi Crop"),tag("Not joined yet","warn")),
+   h("p",{class:"muted"},"Installation ",h("code",null,INSTALLATION)," · this page comes from the main PC, on your local network, and changes nothing by itself."),
+   h("div",{class:"card"},h("ol",{class:"wizard"},
+    h("li",null,h("strong",null,"Get a one-time code on the main PC"),h("span",{class:"muted"},"Open Lefi Crop Helper there, go to Nodes and press Create a code. It works once, for 30 minutes.")),
+    h("li",null,h("strong",null,"Type the code here"),input),
+    h("li",null,h("strong",null,"Open Terminal on this PC, paste this command and press Return"),h("div",{class:"cmd"},cmd,copyBtn(joinCommand)),
+      h("span",{class:"muted small"},"It downloads the Lefi Crop Helper service from the main PC, checks it, and joins with your code. macOS asks for this PC's password once, so the service can start with the Mac.")),
+    h("li",null,h("strong",null,"Check the security fingerprint"),h("span",{class:"muted"},"The main PC's screen must show one starting with "),h("code",null,FP_SHORT),h("span",{class:"muted"},". If it differs, stop: you may not be talking to your main PC.")),
+    h("li",null,h("strong",null,"Wait here"),h("span",{class:"muted"},"This page changes by itself when this PC has joined. Then choose what it runs on the main PC.")))),
+   h("div",{class:"card"},h("h2",null,"If the command shows an error"),h("table",null,
+    h("tr",null,h("th",null,"It says"),h("th",null,"What to do")),
+    h("tr",null,h("td",null,h("code",null,"This join code is not valid")),h("td",null,"Check the code, or create a new one.")),
+    h("tr",null,h("td",null,h("code",null,"already used"),", ",h("code",null,"expired")),h("td",null,"Create a new code on the main PC.")),
+    h("tr",null,h("td",null,h("code",null,"created for the PC at")),h("td",null,"That code is for another address. Create one without an address.")),
+    h("tr",null,h("td",null,h("code",null,"The licence covers")),h("td",null,"All the PCs of the licence are in use. Remove one on the main PC.")),
+    h("tr",null,h("td",null,h("code",null,"not supported yet")),h("td",null,"Only Macs can join for now.")),
+    h("tr",null,h("td",null,"No answer at all"),h("td",null,"Check that this PC is on the same network as the main PC, and that its service is running."))))];
+}
+function viewMain(){return[h("div",{class:"head"},h("h1",null,me.main_name||"This is the main PC"),tag("Main PC","ok")),
+  h("p",{class:"muted"},"Installation ",h("code",null,INSTALLATION)),
+  h("div",{class:"card"},h("p",null,"Manage every PC from Lefi Crop Helper, in Nodes. To add another PC, open this address there:"),cmdBox("http://"+MAIN_IP+":"+HTTP_PORT+"/setup"))];}
+
+/* ---- the installer's events, folded ---- */
+function fold(messages){const r={steps:[],failure:null,output:[],result:null,log:null,rollback:null,bench:null};
+  const step=id=>{let s=r.steps.find(x=>x.id===id);if(!s){s={id,title:id,state:"pending",logs:[]};r.steps.push(s);}return s;};
+  for(const m of messages){if(m.kind==="output"){r.output.push(m.line);continue;}const e=m.event||{};
+    switch(e.event){
+      case"plan.started":r.steps=(e.steps||[]).map(s=>({id:s.id,title:s.title||s.id,state:"pending",logs:[]}));break;
+      case"step.started":{const s=step(e.step);s.state="running";if(e.title)s.title=e.title;break;}
+      case"step.ok":{const s=step(e.step);s.state=e.skipped?"skipped":"ok";s.reason=e.reason;break;}
+      case"step.log":{const s=step(e.step);if(e.level==="error"||e.level==="warn"||e.level==="ok")s.logs.push(e.message);break;}
+      case"step.warn":step(e.step).logs.push(e.message);break;
+      case"step.failed":{if(e.step){const s=step(e.step);s.state="failed";}r.failure={code:e.code,message:e.message,hint:e.hint};break;}
+      case"plan.done":r.result=e.result;r.log=e.log;break;
+      case"rollback.done":r.rollback=e.result;break;
+      case"ai.bench":r.bench=e;break;
+    }}
+  return r;}
+const DOT={pending:["","off"],running:["","spinning"],ok:["✓","ok"],skipped:["–","off"],failed:["✕","crit"]};
+function stepRow(s){const d=DOT[s.state]||DOT.pending;return h("li",null,h("span",{class:"dot "+d[1],"aria-hidden":"true"},d[0]),
+  h("div",{class:"step-body"},h("div",{style:s.state==="pending"?"color:var(--faint)":null},s.title,s.state==="skipped"&&s.reason?h("span",{class:"muted small"}," · "+s.reason):null),
+   s.logs.slice(-4).map(l=>h("div",{class:"step-log"},l))));}
+function downloadLog(lines,name){const a=h("a",{href:URL.createObjectURL(new Blob([lines.join("\n")+"\n"],{type:"text/plain"})),download:name});document.body.append(a);a.click();a.remove();}
+
+function viewWork(c){
+  const st=CMD_STATE[c.state]||[c.state,"off"];const f=logData&&logData.id===c.command.id?fold(logData.messages):null;
+  const active=["queued","delivered","running"].includes(c.state);const failed=c.state==="failed";
+  const pct=c.steps_total?Math.round(c.steps_done/c.steps_total*100):0;
+  const out=[h("div",{class:"card-head"},h("h2",{class:"grow"},cmdTitle(c.command)),tag(st[0],st[1])),
+    c.steps_total?h("div",null,h("div",{class:"bar",role:"progressbar","aria-valuenow":pct,"aria-valuemin":"0","aria-valuemax":"100","aria-label":"Progress"},h("div",{style:"width:"+pct+"%"})),
+      h("div",{class:"muted small"},"Step "+c.steps_done+" of "+c.steps_total+(c.current_step?" · "+c.current_step:""))):null];
+  if(failed){const w=f&&f.failure;out.push(h("div",{class:"problem",role:"alert"},h("strong",null,w&&w.message||c.error||"The work stopped on this PC."),
+     w&&w.code&&w.code!=="STEP_FAILED"?h("code",null,w.code):null,
+     h("div",{class:"fix"},w&&w.hint?w.hint:"The log below shows what happened. Fix it and press Install again on the main PC: finished steps are not repeated. To go back, use Undo there.")));}
+  if(c.state==="cancelled"&&c.rollback_result&&c.rollback_result!=="ok")out.push(h("div",{class:"problem warn"},h("strong",null,"Some changes could not be undone. See the log.")));
+  if(f&&f.steps.length){const d=h("details",{open:stepsOpen||active||failed,ontoggle:e=>{stepsOpen=e.target.open;}},h("summary",null,"Every step"),h("ol",{class:"steps"},f.steps.map(stepRow)));out.push(d);}
+  if(f&&f.output.length){const pre=h("pre",{class:"log",tabindex:"0","aria-label":"Log"},f.output.join("\n"));
+    out.push(h("details",{open:logOpen||failed,ontoggle:e=>{logOpen=e.target.open;}},h("summary",null,"Full log ("+f.output.length+" lines)"),pre,
+      h("div",{style:"display:flex;gap:8px"},copyBtn(f.output.join("\n"),"Copy the log"),h("button",{class:"btn",type:"button",onclick:()=>downloadLog(f.output,"lefi-"+c.command.id+".log")},"Download"))));
+    requestAnimationFrame(()=>{if(active)pre.scrollTop=pre.scrollHeight;});}
+  return h("div",{class:"card"},out);
+}
+
+/* ---- components and their details ---- */
+function compCard(c,assigned){const st=COMP_STATE[c.state]||[c.state,"off"];const info=COMP[c.id]||{t:c.id,d:""};const pending=!c.installed&&assigned.includes(c.id)&&c.state==="not_installed";
+  return h("button",{class:"comp",type:"button","data-dim":c.state==="not_installed"&&!pending?"1":null,"aria-expanded":selected===c.id?"true":"false",
+    onclick:()=>{if(c.id==="ai"&&PAGE==="home"){const a=document.getElementById("ai-card");if(a){a.scrollIntoView({behavior:"smooth",block:"start"});return;}}selected=selected===c.id?null:c.id;render(true);}},
+   h("span",{class:"comp-title"},info.t),h("span",{class:"muted small"},c.version?"Version "+c.version:info.d),
+   h("span",null,pending?tag("Chosen, not installed yet","info"):tag(st[0],st[1])));}
+function aiDetail(m,c){const ai=m.report.ai,b=m.ai_bench,x=m.report.metrics,url=m.ai_endpoint;const out=[];
+  const st=COMP_STATE[c.state]||[c.state,"off"];
+  out.push(h("div",{class:"card-head",id:"ai-card"},h("h2",{class:"grow"},"AI node"),tag(st[0],st[1])));
+  if(c.detail)out.push(h("p",{class:"muted"},c.detail));
+  if(!ai){out.push(h("div",{class:"problem warn"},h("strong",null,"The AI does not answer on this PC."),h("div",{class:"fix"},c.installed?"Start it from the main PC: Nodes → this PC → AI node → Start.":"Install it from the main PC: Nodes → this PC → AI node → Install.")));return out;}
+  const inMem=ai.loaded.reduce((a,z)=>a+z.size_gb,0);
+  out.push(h("h3",null,"What the AI uses now"),h("div",{class:"kv big"},
+    kv("Model memory",ai.loaded.length?gb(inMem):"None loaded"),
+    kv("Model on GPU",ai.loaded.length?ai.loaded.map(z=>z.gpu_pct===null?"unknown":z.gpu_pct+"%").join(", "):"—"),
+    kv("GPU in use",x.gpu_utilization_pct===null?null:x.gpu_utilization_pct+"%")));
+  out.push(h("p",{class:"muted small"},"GPU in use counts every program on this PC, not only the AI. A model stays in memory for a few minutes after its last request."));
+  out.push(h("h3",null,"Speed"),h("div",{class:"kv big"},kv("Tokens per second",b?b.tokens_per_s:"Not measured"),kv("Model tested",b?b.model:"—"),kv("Measured",b?when(b.at):"—")));
+  if(b)out.push(h("div",{class:"kv"},kv("Share on GPU",b.gpu_pct===null||b.gpu_pct===undefined?"unknown":b.gpu_pct+"%"),kv("Loading the model",b.load_ms===null?"unknown":b.load_ms+" ms"),kv("Reading the prompt",b.prompt_ms===null?"unknown":b.prompt_ms+" ms"),kv("Tokens generated",b.eval_count)));
+  else out.push(h("p",{class:"muted small"},"A speed test runs a real, short generation. Start it on the main PC: Nodes → this PC → AI node → Measure speed."));
+  out.push(h("h3",null,"Models loaded in memory"));
+  out.push(ai.loaded.length?h("table",null,h("tr",null,h("th",null,"Model"),h("th",null,"Memory"),h("th",null,"On GPU"),h("th",null,"Context")),ai.loaded.map(z=>h("tr",null,h("td",null,z.name),h("td",null,z.size_gb+" GB"),h("td",null,z.gpu_pct===null?"unknown":z.gpu_pct+"%"),h("td",null,z.context_length===null?"unknown":z.context_length)))):h("p",{class:"muted"},"None now. A model loads on the first request."));
+  out.push(h("h3",null,"Models on this PC"),h("table",null,h("tr",null,h("th",null,"Model"),h("th",null,"Size on disk")),ai.models.map(z=>h("tr",null,h("td",null,z.name),h("td",null,z.size_gb+" GB")))));
+  out.push(h("h3",null,"Where to reach it"),cmdBox(url));
+  const model=(ai.loaded[0]||ai.models[0]||{}).name;
+  if(model)out.push(h("details",null,h("summary",null,"Try it from a terminal"),cmdBox("curl "+url+"/api/generate -d '"+JSON.stringify({model,prompt:"Hello",stream:false,think:false})+"'")));
+  if(ai.lan)out.push(h("div",{class:"problem warn"},h("strong",null,"Open to your local network, without a password."),h("div",{class:"fix"},"Ollama has no authentication. Allow only the main PC ("+MAIN_IP+") on port 11434 in this PC's firewall or the router.")));
+  if(ai.lan===false)out.push(h("div",{class:"problem info"},h("strong",null,"Only this PC can reach it."),h("div",{class:"fix"},"Lefi Brain on the main PC needs it on the network: install the AI node again from the main PC.")));
+  if(ai.kill_switch)out.push(h("div",{class:"problem warn"},h("strong",null,"The AI kill switch is on.")));
+  out.push(h("h3",null,"Service"),h("div",{class:"kv"},kv("Ollama",ai.version),kv("Lefi Brain",m.used_by_brain?"Uses this AI":"Does not use this AI")));
+  return out;}
+function otherDetail(m,c){const info=COMP[c.id]||{t:c.id,d:""};const st=COMP_STATE[c.state]||[c.state,"off"];const out=[h("div",{class:"card-head"},h("h2",{class:"grow"},info.t),tag(st[0],st[1])),h("p",{class:"muted"},info.d)];
+  if(c.installed)out.push(h("div",{class:"kv"},c.version?kv("Version",c.version):null,c.path?kv("Location",c.path):null));
+  else out.push(h("p",{class:"muted"},"Not on this PC. Install it from the main PC: Nodes → this PC."));
+  if(c.id==="desktop"&&c.installed)out.push(h("p",{class:"muted small"},c.paired?"Connected to Lefi Brain.":"Not connected to Lefi Brain yet: the main PC connects it by itself."));
+  return out;}
+
+/* ---- charts: one measure each, the last hour, from this PC's heartbeats ---- */
+const SVGNS="http://www.w3.org/2000/svg";
+function s(tag,attrs){const e=document.createElementNS(SVGNS,tag);for(const[k,v]of Object.entries(attrs||{}))e.setAttribute(k,v);return e;}
+const gb=v=>v===null||v===undefined?null:(Math.round(v*10)/10)+" GB";
+const clock=t=>new Date(t*1000).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+const WINDOW=3600,GAP=35;
+function spark(samples,key,max,fmt,now,label){
+  const W=300,H=56,pts=samples.filter(p=>p[key]!==null&&p[key]!==undefined&&p.t>=now-WINDOW);
+  const wrap=h("div",{class:"spark"});const readout=h("div",{class:"spark-read muted small"},pts.length?"Last hour":"No measurements yet");
+  if(!pts.length){wrap.append(readout);return wrap;}
+  const top=Math.max(max||0,...pts.map(p=>p[key]))||1;
+  const X=t=>(t-(now-WINDOW))/WINDOW*W,Y=v=>H-2-(v/top)*(H-4);
+  const svg=s("svg",{viewBox:"0 0 "+W+" "+H,preserveAspectRatio:"none",role:"img",
+    "aria-label":label+", last hour: lowest "+fmt(Math.min(...pts.map(p=>p[key])))+", highest "+fmt(Math.max(...pts.map(p=>p[key])))+", now "+fmt(pts[pts.length-1][key])});
+  svg.append(s("line",{x1:0,x2:W,y1:H-1,y2:H-1,class:"base","vector-effect":"non-scaling-stroke"}));
+  // A heartbeat missing for longer than a few intervals is a gap, never a line drawn across it.
+  let runs=[],run=[];for(const p of pts){if(run.length&&p.t-run[run.length-1].t>GAP){runs.push(run);run=[];}run.push(p);}runs.push(run);
+  for(const r of runs){const d=r.map((p,i)=>(i?"L":"M")+X(p.t).toFixed(1)+" "+Y(p[key]).toFixed(1)).join(" ");
+    svg.append(s("path",{d:d+" L"+X(r[r.length-1].t).toFixed(1)+" "+(H-1)+" L"+X(r[0].t).toFixed(1)+" "+(H-1)+" Z",class:"area"}));
+    svg.append(s("path",{d,class:"line","vector-effect":"non-scaling-stroke"}));}
+  const cross=s("line",{y1:0,y2:H,class:"cross","vector-effect":"non-scaling-stroke",visibility:"hidden"});svg.append(cross);
+  const move=e=>{const b=svg.getBoundingClientRect();const t=(now-WINDOW)+(e.clientX-b.left)/b.width*WINDOW;
+    let best=pts[0];for(const p of pts)if(Math.abs(p.t-t)<Math.abs(best.t-t))best=p;
+    const x=X(best.t);cross.setAttribute("x1",x);cross.setAttribute("x2",x);cross.setAttribute("visibility","visible");
+    readout.textContent=clock(best.t)+" · "+fmt(best[key]);hovering=true;};
+  svg.addEventListener("pointermove",move);svg.addEventListener("pointerdown",move);
+  svg.addEventListener("pointerleave",()=>{cross.setAttribute("visibility","hidden");readout.textContent="Last hour";hovering=false;});
+  wrap.append(svg,h("div",{class:"spark-axis muted small"},h("span",null,"1 h ago"),readout,h("span",null,"now")));
+  return wrap;}
+function meter(pct){if(pct===null||pct===undefined||isNaN(pct))return null;const v=Math.max(0,Math.min(100,pct));
+  return h("div",{class:"bar",role:"meter","aria-valuenow":Math.round(v),"aria-valuemin":"0","aria-valuemax":"100"},h("div",{style:"width:"+v+"%"}));}
+function tile(title,value,sub,pct,chart){return h("div",{class:"tile"},h("div",{class:"tile-title muted small"},title),h("div",{class:"tile-value"},value===null||value===undefined?"unknown":value),
+  sub?h("div",{class:"muted small"},sub):null,meter(pct),chart);}
+function viewResources(m){const r=m.report,p=r.pc,x=r.metrics,S=m.samples||[],now=m.now||Math.floor(Date.now()/1000);
+  const unified=/apple/i.test(p.chip||"");const mem=p.memory_gb;const ai=r.ai;const aiGb=ai?ai.loaded.reduce((a,z)=>a+z.size_gb,0):null;
+  const pct=v=>v===null||v===undefined?"unknown":Math.round(v)+"%";
+  const cpuPct=x.load_1m!==null&&p.cores?x.load_1m/p.cores*100:null;
+  return h("div",{class:"card"},h("div",{class:"card-head"},h("h2",{class:"grow"},"Resources"),h("span",{class:"muted small"},"Measured on this PC every 10 s")),
+    h("div",{class:"tiles"},
+      tile("Processor",x.load_1m===null?null:x.load_1m.toFixed(2),p.cores?"Load (1 min) on "+p.cores+" cores":"Load (1 min)",cpuPct,spark(S,"load_1m",p.cores,v=>v.toFixed(2),now,"Processor load")),
+      tile("Memory (RAM)",gb(x.memory_used_gb),mem?"in use of "+mem+" GB":"in use",mem&&x.memory_used_gb!==null?x.memory_used_gb/mem*100:null,spark(S,"memory_used_gb",mem,gb,now,"Memory in use")),
+      tile("GPU",x.gpu_utilization_pct===null?null:pct(x.gpu_utilization_pct),"in use, by every program",x.gpu_utilization_pct,spark(S,"gpu_utilization_pct",100,pct,now,"GPU in use")),
+      tile("GPU memory",gb(x.gpu_memory_in_use_gb),unified&&mem?"in use, shared with the "+mem+" GB of RAM":"in use",unified&&mem&&x.gpu_memory_in_use_gb!==null?x.gpu_memory_in_use_gb/mem*100:null,spark(S,"gpu_memory_in_use_gb",unified?mem:null,gb,now,"GPU memory in use")),
+      ai?tile("AI models in memory",ai.loaded.length?gb(aiGb):"None",ai.loaded.length?ai.loaded.map(z=>z.name).join(", "):"A model loads on the first request",mem&&aiGb?aiGb/mem*100:null,spark(S,"ai_loaded_gb",mem,gb,now,"AI model memory")):null));}
+
+/* ---- joined, setup not finished: what is still missing, one step at a time ---- */
+function viewSetup(m){const r=m.report;const signal=!!m.heartbeat;const assigned=m.assigned||[];
+  const comps=r?r.components:[];const missing=assigned.filter(id=>!comps.some(c=>c.id===id&&c.installed));
+  const names=ids=>ids.map(id=>(COMP[id]||{t:id}).t).join(", ");
+  const done=(ok,title,body)=>h("li",{class:ok?"done":"todo"},h("strong",null,title),body?h("span",{class:"muted"},body):null);
+  const out=[h("div",{class:"head"},h("h1",null,m.name||m.hostname),tag("Setup not finished","info")),
+    h("p",{class:"muted"},m.hostname+" · "+m.ip+" · main PC "+(m.main_name||"")+" ("+MAIN_IP+") · last signal ",h("span",{id:"seen"},agoText(m.seconds_since_seen)))];
+  out.push(h("div",{class:"card"},h("ol",{class:"wizard"},
+    done(true,"This PC joined the installation","Its certificate was issued by the main PC."),
+    done(signal,signal?"Its Lefi Crop Helper service is running":"Start its Lefi Crop Helper service",
+      signal?"It sends its signal to the main PC every 10 s.":h("span",null,"The main PC has had no signal from this PC yet. If Terminal on this PC asks for its password, type it there and press Return: the service starts only after that. If Terminal shows an error or was closed, run this again:",cmdBox("curl -fsS http://"+MAIN_IP+":"+HTTP_PORT+"/setup/update.sh | sh"))),
+    done(assigned.length>0,"Choose what this PC runs",assigned.length?"Chosen: "+names(assigned)+".":"On the main PC: Lefi Crop Helper → Nodes → "+(m.name||"this PC")+", and choose its components (for the AI: AI node)."),
+    done(assigned.length>0&&!missing.length&&signal,"Install it",!assigned.length?"After choosing.":missing.length?"Not installed yet: "+names(missing)+". On the main PC, press Install on this PC in Nodes. Progress shows below.":"Installed."),
+    h("li",{class:"todo"},h("strong",null,"Then"),h("span",{class:"muted"},"This page becomes this PC's home by itself: its resources, the AI and its work.")))));
+  if(signal&&(m.service_outdated||!r))out.push(h("div",{class:"card"},h("div",{class:"problem warn"},h("strong",null,"The Lefi Crop Helper service on this PC is out of date"),h("div",{class:"fix"},"It cannot install nor show details until it is updated. Open Terminal on this PC and run:")),cmdBox("curl -fsS http://"+MAIN_IP+":"+HTTP_PORT+"/setup/update.sh | sh"),h("p",{class:"muted small"},"macOS asks for this PC's password once. This PC stays joined: no new code is needed.")));
+  if(signal&&r&&!m.service_outdated){const u=updatesCard(m);if(u)out.push(u);}
+  if(m.command)out.push(viewWork(m.command));
+  if(r){const sel=comps.find(z=>z.id===selected);
+    out.push(h("div",{class:"card"},h("div",{class:"card-head"},h("h2",{class:"grow"},"What this PC runs"),h("span",{class:"muted small"},"Select one for details")),h("div",{class:"comps"},comps.map(z=>compCard(z,assigned)))));
+    if(sel)out.push(h("div",{class:"card"},sel.id==="ai"?aiDetail(m,sel):otherDetail(m,sel)));}
+  out.push(h("p",{class:"muted small"},"This page only shows. Everything is done from the main PC, in Lefi Crop Helper → Nodes."));
+  return out;}
+
+function viewHome(m){const r=m.report,conn={online:["Connected","ok"],stale:["No signal for a while","warn"],offline:["Offline","crit"],never:["Waiting for its first signal","info"]}[m.connectivity]||[m.connectivity,"off"];
+  const fresh={online:["LIVE","ok"],stale:["STALE","warn"],offline:["OFFLINE","crit"]}[m.connectivity];
+  const out=[h("div",{class:"head"},h("h1",null,m.name||m.hostname),tag(conn[0],conn[1]),fresh?tag(fresh[0],fresh[1]):null),
+    h("p",{class:"muted"},m.hostname+" · "+m.ip+" · main PC "+(m.main_name||"")+" ("+MAIN_IP+") · last signal ",h("span",{id:"seen"},agoText(m.seconds_since_seen)))];
+  if(m.connectivity!=="online"&&r)out.push(h("div",{class:"problem warn"},h("strong",null,"These figures are from the last signal, not from now."),h("div",{class:"fix"},"Check that the Lefi Crop Helper service runs on this PC and that it is on the same network as the main PC.")));
+  if(m.service_outdated||!r){out.push(h("div",{class:"card"},h("div",{class:"problem warn"},h("strong",null,"The Lefi Crop Helper service on this PC is out of date"),h("div",{class:"fix"},"It cannot install nor show details until it is updated. Open Terminal on this PC and run:")),cmdBox("curl -fsS http://"+MAIN_IP+":"+HTTP_PORT+"/setup/update.sh | sh"),h("p",{class:"muted small"},"macOS asks for this PC's password once. This PC stays joined: no new code is needed.")));}
+  if(r&&!m.service_outdated){const u=updatesCard(m);if(u)out.push(u);}
+  const c=m.command;const cur=c&&(["queued","delivered","running","failed"].includes(c.state)||(c.state==="cancelled"&&c.rollback_result&&c.rollback_result!=="ok"))?c:null;
+  if(cur)out.push(viewWork(cur));
+  if(r){out.push(viewResources(m));
+    const cs=r.components;const aiC=cs.find(z=>z.id==="ai");const sel=cs.find(z=>z.id===selected&&z.id!=="ai");
+    if(aiC&&(aiC.state!=="not_installed"||r.ai||m.assigned.includes("ai")))out.push(h("div",{class:"card"},aiDetail(m,aiC)));
+    out.push(h("div",{class:"card"},h("div",{class:"card-head"},h("h2",{class:"grow"},"What this PC runs"),h("span",{class:"muted small"},"Select one for details")),
+      h("div",{class:"comps"},cs.map(z=>compCard(z,m.assigned)))));
+    if(sel)out.push(h("div",{class:"card"},otherDetail(m,sel)));
+    const p=r.pc,x=r.metrics,hb=m.heartbeat||{};
+    out.push(h("div",{class:"card"},h("h2",null,"This PC"),h("div",{class:"kv"},kv("Name on the network",(m.name||"unknown")+".local"),kv("Computer name",m.hostname),kv("Address",m.ip),kv("Model",p.model),kv("Chip",p.chip),kv("Cores",p.cores),kv("Memory",p.memory_gb===null?null:p.memory_gb+" GB"),kv("macOS",p.os_version),kv("Up",upText(hb.uptime_s)),kv("Free disk",hb.disk_free_gb===null||hb.disk_free_gb===undefined?null:hb.disk_free_gb+" GB"),kv("Load (1 min)",x.load_1m),kv("Helper service",hb.helperd_version))));}
+  const past=(m.history||[]).filter(z=>z!==cur);
+  if(past.length)out.push(h("div",{class:"card history"},h("h2",null,"Work on this PC"),h("table",null,h("tr",null,h("th",null,"What"),h("th",null,"When"),h("th",null,"Result")),
+    past.map(z=>{const st=CMD_STATE[z.state]||[z.state,"off"];return h("tr",null,h("td",null,cmdTitle(z.command)),h("td",null,when(z.created_at)),h("td",null,tag(st[0],st[1])));}))));
+  out.push(h("p",{class:"muted small"},"This page only shows. Everything is done from the main PC, in Lefi Crop Helper → Nodes."));
+  return out;}
+
+function render(force){if(!me)return;
+  const{seconds_since_seen,now,...rest}=me;const key=JSON.stringify([rest,selected,logData&&logData.messages.length]);
+  const s=document.getElementById("seen");if(s)s.textContent=agoText(seconds_since_seen);
+  if(!force&&(key===lastKey||hovering))return;
+  // Do not pull the text from under someone selecting a command or a log.
+  const sel=window.getSelection();if(!force&&sel&&!sel.isCollapsed)return;
+  lastKey=key;
+  const a=document.getElementById("app");const nodes=me.joined?(PAGE==="home"?viewHome(me):viewSetup(me)):me.is_main?viewMain():viewJoin();a.replaceChildren(...nodes);
+  document.title="Lefi Crop · "+(me.joined?(me.name||me.hostname):"join this installation");
+}
+async function loadLog(){const c=me&&me.command;if(!c)return;const id=c.command.id;
+  if(logData&&logData.id===id&&logData.state===c.state&&!["queued","delivered","running"].includes(c.state))return;
+  try{const r=await fetch("/setup/me/log/"+id);if(!r.ok)return;const j=await r.json();logData={id,state:c.state,messages:j.messages||[]};}catch(e){}}
+async function poll(){try{const r=await fetch("/setup/me");me=await r.json();
+    // Joined: this PC's home. Not (or no longer) joined: the guided join.
+    // Setup finished: this PC's home. Not finished (or no longer joined): the setup steps.
+    if(PAGE==="setup"&&me.joined&&me.setup_done){location.replace("/");return;}
+    if(PAGE==="home"&&!(me.joined&&me.setup_done)){location.replace("/setup");return;}
+    await loadLog();render(false);}catch(e){
+    const s=document.getElementById("seen");if(s)s.textContent="main PC not answering";}
+  setTimeout(poll,3000);}
+poll();
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+{
+  "$comment": "Lefi Crop standard sensor node (ADR-052). Single source of truth for the firmware and Lefi Brain: one channel per physical sensor slot, with a fixed sensor_key. Physical facts come only from docs/hardware/SENSOR_INVENTORY.md; null = not verified yet (TODO(verify)). Lefi Brain keeps a byte-identical copy (services/brain/src/lefi_brain/modules/field_devices/profiles/), checked by a test. A pin is set only with wiring_verified (who, when, how). Several DS18B20 may share one GPIO only when the firmware addresses each by its 64-bit ROM, never by search order (ADR-061).",
+  "id": "lefi-node-esp32.v1",
+  "name": "Lefi Crop sensor node (ESP32)",
+  "board": {
+    "listing": "ELEGOO ESP-32 Development Board (pack of 2), USB-C, CP2102 USB-serial",
+    "asin": "B0D8T7Z1P5",
+    "module_marking": null,
+    "flash_mb": null,
+    "verified": false
+  },
+  "device_id_prefix": "esp32-",
+  "network": [
+    "wifi"
+  ],
+  "remote_log": true,
+  "channels": [
+    {
+      "sensor_key": "air-1",
+      "label": "Air temperature and humidity",
+      "model": "SHT31 (SHT31-D board)",
+      "model_confirmed": true,
+      "interface": "i2c",
+      "i2c_address": "0x44",
+      "pins": {
+        "sda": 21,
+        "scl": 22
+      },
+      "supply_v": "2.4-5.5 (listing)",
+      "variables": [
+        {
+          "variable": "air_temperature",
+          "label": "Air temperature",
+          "unit": "°C",
+          "decimals": 1
+        },
+        {
+          "variable": "air_humidity",
+          "label": "Relative humidity",
+          "unit": "%RH",
+          "decimals": 0
+        }
+      ],
+      "scopes": [
+        "device",
+        "zone"
+      ],
+      "default_scope": "device",
+      "wiring_verified": {
+        "by": "owner",
+        "date": "2026-11-08",
+        "how": "test sketch on the real ELEGOO board printed valid readings"
+      }
+    },
+    {
+      "sensor_key": "air-2",
+      "label": "Air temperature and humidity (second probe)",
+      "model": "SHT31 (SHT31-D board)",
+      "model_confirmed": true,
+      "interface": "i2c",
+      "i2c_address": "0x44",
+      "pins": {
+        "sda": 25,
+        "scl": 26
+      },
+      "supply_v": "2.4-5.5 (listing)",
+      "variables": [
+        {
+          "variable": "air_temperature",
+          "label": "Air temperature",
+          "unit": "°C",
+          "decimals": 1
+        },
+        {
+          "variable": "air_humidity",
+          "label": "Relative humidity",
+          "unit": "%RH",
+          "decimals": 0
+        }
+      ],
+      "scopes": [
+        "device",
+        "zone"
+      ],
+      "default_scope": "device",
+      "notes": "own I2C controller (Wire1), so it can use the same address as air-1",
+      "wiring_verified": {
+        "by": "owner",
+        "date": "2026-11-09",
+        "how": "wiring stated by the owner for board ESP1 (firmware spec rev. 4); not yet confirmed with readings"
+      }
+    },
+    {
+      "sensor_key": "soil-temp-1",
+      "label": "Soil temperature",
+      "model": "DROK DS18B20 waterproof probe",
+      "model_confirmed": true,
+      "interface": "1-wire",
+      "pins": {
+        "data": null
+      },
+      "supply_v": "3.0-5.5 (sensor)",
+      "variables": [
+        {
+          "variable": "soil_temperature",
+          "label": "Soil temperature",
+          "unit": "°C",
+          "decimals": 1
+        }
+      ],
+      "scopes": [
+        "plant",
+        "container"
+      ],
+      "default_scope": "plant",
+      "notes": "separate GPIO from water-temp-1 (owner, 2026-11-08); pin not chosen yet",
+      "wiring_verified": null
+    },
+    {
+      "sensor_key": "water-temp-1",
+      "label": "Irrigation water temperature",
+      "model": "DROK DS18B20 waterproof probe",
+      "model_confirmed": true,
+      "interface": "1-wire",
+      "pins": {
+        "data": 4
+      },
+      "supply_v": "3.0-5.5 (sensor)",
+      "variables": [
+        {
+          "variable": "water_temperature",
+          "label": "Water temperature",
+          "unit": "°C",
+          "decimals": 1
+        }
+      ],
+      "scopes": [
+        "zone"
+      ],
+      "default_scope": "zone",
+      "notes": "on ESP1 it shares GPIO4 with water-temp-2: the firmware reads each probe by its ROM (ADR-061)",
+      "wiring_verified": {
+        "by": "owner",
+        "date": "2026-11-08",
+        "how": "test sketch on the real ELEGOO board printed valid readings"
+      }
+    },
+    {
+      "sensor_key": "water-temp-2",
+      "label": "Irrigation water temperature (second probe)",
+      "model": "DROK DS18B20 waterproof probe",
+      "model_confirmed": true,
+      "interface": "1-wire",
+      "pins": {
+        "data": 4
+      },
+      "supply_v": "3.0-5.5 (sensor)",
+      "variables": [
+        {
+          "variable": "water_temperature",
+          "label": "Water temperature",
+          "unit": "°C",
+          "decimals": 1
+        }
+      ],
+      "scopes": [
+        "zone"
+      ],
+      "default_scope": "zone",
+      "notes": "same 1-Wire bus as water-temp-1 on ESP1 (GPIO4); identified by its ROM, set in the firmware (ADR-061)",
+      "wiring_verified": {
+        "by": "owner",
+        "date": "2026-11-09",
+        "how": "wiring stated by the owner for board ESP1 (firmware spec rev. 4); not yet confirmed with readings"
+      }
+    },
+    {
+      "sensor_key": "tds-1",
+      "label": "Irrigation water dissolved solids (TDS)",
+      "model": "KEYESTUDIO Water Quality TDS Meter",
+      "model_confirmed": true,
+      "interface": "analog",
+      "pins": {
+        "adc": 34
+      },
+      "supply_v": "3.3 (owner wiring)",
+      "variables": [
+        {
+          "variable": "water_tds",
+          "label": "Dissolved solids",
+          "unit": "ppm",
+          "decimals": 0
+        }
+      ],
+      "scopes": [
+        "zone"
+      ],
+      "default_scope": "zone",
+      "wiring_verified": {
+        "by": "owner",
+        "date": "2026-11-08",
+        "how": "test sketch on the real ELEGOO board printed valid readings"
+      },
+      "adc": {
+        "resolution_bits": 12,
+        "attenuation_db": 11,
+        "unit": "ADC1 (works with Wi-Fi on)"
+      },
+      "calibrated": false,
+      "notes": "ppm from the vendor's cubic formula with temperature compensation from water-temp-1; not calibrated"
+    },
+    {
+      "sensor_key": "soil-moisture-1",
+      "label": "Soil moisture",
+      "model": null,
+      "model_confirmed": false,
+      "interface": null,
+      "pins": {},
+      "supply_v": null,
+      "variables": [
+        {
+          "variable": "soil_moisture",
+          "label": "Soil moisture",
+          "unit": null,
+          "decimals": 0
+        }
+      ],
+      "scopes": [
+        "plant",
+        "container"
+      ],
+      "default_scope": "plant",
+      "wiring_verified": null
+    }
+  ]
+}

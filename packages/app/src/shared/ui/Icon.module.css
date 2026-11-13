@@ -1,0 +1,14 @@
+.icon {
+  font-family: var(--lefi-font-icon);
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  display: inline-flex;
+  flex-shrink: 0;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}

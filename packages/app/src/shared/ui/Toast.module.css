@@ -1,0 +1,22 @@
+.toast {
+  position: fixed;
+  right: 104px;
+  bottom: 28px;
+  z-index: 100;
+  background: var(--lefi-text);
+  color: var(--lefi-bg);
+  border-radius: var(--lefi-radius-lg);
+  padding: 12px 16px 12px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 440px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.toast img {
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+}

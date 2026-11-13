@@ -1,0 +1,21 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lefi-text-strong);
+}
+.input {
+  height: 44px;
+  border: 1px solid var(--lefi-border-input);
+  border-radius: var(--lefi-radius-md);
+  padding: 0 14px;
+  font-size: 14px;
+  background: #fff;
+  color: var(--lefi-text);
+  outline: none;
+}
+.input:focus {
+  border-color: var(--lefi-green-400);
+}

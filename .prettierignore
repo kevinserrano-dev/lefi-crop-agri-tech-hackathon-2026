@@ -1,0 +1,8 @@
+pnpm-lock.yaml
+**/src-tauri/target/
+**/src-tauri/gen/
+*.md
+apps/desktop/src-tauri/
+apps/desktop/dist/
+# Flutter app: formatted with `dart format`, checked with `flutter analyze`
+apps/lefi-mobile/

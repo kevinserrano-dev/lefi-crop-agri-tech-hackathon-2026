@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 4,
+  "uptime_ms": 12000,
+  "origin": "SIMULATED",
+  "lines": [
+    {
+      "t": 11000,
+      "level": "info",
+      "tag": "wifi",
+      "msg": "connected: IP 192.168.8.51, signal -63 dBm"
+    },
+    {
+      "t": 11900,
+      "level": "warn",
+      "tag": "sensors",
+      "msg": "DS18B20 water (GPIO4): 0 probe(s)"
+    }
+  ]
+}

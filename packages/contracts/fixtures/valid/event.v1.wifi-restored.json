@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 3,
+  "uptime_ms": 845000,
+  "origin": "SIMULATED",
+  "type": "wifi_restored",
+  "severity": "warn",
+  "down_ms": 120400,
+  "wifi_last_reason": 201
+}

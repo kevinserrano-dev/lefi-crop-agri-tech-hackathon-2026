@@ -1,0 +1,141 @@
+[project]
+name = "lefi-brain"
+version = "0.14.0"
+description = "LEFI CROP BRAIN — local-first greenhouse backend (modular monolith)"
+requires-python = ">=3.12"
+license = { text = "Proprietary — see repository LICENSE" }
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "sqlalchemy[asyncio]>=2.0.36",
+  "aiosqlite>=0.20",
+  "alembic>=1.14",
+  "structlog>=24.4",
+  "argon2-cffi>=23.1",
+  "cryptography>=44",
+  "aiomqtt>=2.3",
+  "httpx>=0.28",
+  "pyobjc-framework-avfoundation>=11 ; sys_platform == 'darwin'",
+  "pyobjc-framework-quartz>=11 ; sys_platform == 'darwin'",
+  "pyobjc-framework-libdispatch>=11 ; sys_platform == 'darwin'",
+  "pyobjc-framework-vision>=11 ; sys_platform == 'darwin'",
+  "segno>=1.6",
+]
+
+[project.scripts]
+lefi-brain = "lefi_brain.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "pytest-asyncio>=0.24",
+  "httpx>=0.28",
+  "ruff>=0.8",
+  "mypy>=1.13",
+  "import-linter>=2.1",
+  "jsonschema>=4.23",
+  "types-jsonschema>=4.23",
+  "amqtt>=0.11",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lefi_brain"]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-q"
+filterwarnings = ["error"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "DTZ", "RUF", "SIM", "ASYNC"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106", "S608"]
+"migrations/**" = ["S608"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["src", "tests"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["amqtt.*"]  # test-only broker, untyped
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["AVFoundation", "CoreMedia", "Quartz", "Foundation", "objc", "dispatch", "Vision"]  # PyObjC, macOS
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["alembic.*"]
+ignore_missing_imports = false
+
+[tool.importlinter]
+root_package = "lefi_brain"
+include_external_packages = false
+
+[[tool.importlinter.contracts]]
+name = "core is technical plumbing: it never imports features, api or workflows"
+type = "forbidden"
+source_modules = ["lefi_brain.core", "lefi_brain.shared"]
+forbidden_modules = ["lefi_brain.modules", "lefi_brain.api", "lefi_brain.workflows", "lefi_brain.main", "lefi_brain.cli"]
+
+[[tool.importlinter.contracts]]
+name = "audit depends only on core and shared (everyone may depend on audit)"
+type = "forbidden"
+source_modules = ["lefi_brain.modules.audit"]
+forbidden_modules = ["lefi_brain.modules.identity", "lefi_brain.api", "lefi_brain.workflows", "lefi_brain.main", "lefi_brain.cli", "lefi_brain.container"]
+
+[[tool.importlinter.contracts]]
+name = "modules never import the composition root or the app-level api"
+type = "forbidden"
+source_modules = ["lefi_brain.modules"]
+forbidden_modules = ["lefi_brain.api", "lefi_brain.main", "lefi_brain.cli", "lefi_brain.container"]
+
+[[tool.importlinter.contracts]]
+name = "field devices and plants know each other only through ports wired in the composition root"
+type = "independence"
+modules = ["lefi_brain.modules.plants", "lefi_brain.modules.field_devices"]
+
+[[tool.importlinter.contracts]]
+name = "Lefi AI assistant reads other modules only through the tools wired in the composition root (ADR-067)"
+type = "forbidden"
+source_modules = ["lefi_brain.modules.assistant"]
+forbidden_modules = ["lefi_brain.modules.plants", "lefi_brain.modules.field_devices", "lefi_brain.modules.telemetry", "lefi_brain.modules.client_devices"]
+
+[[tool.importlinter.contracts]]
+name = "robotics stands alone: no other feature module, so Lefi AI has no path to a robot (ADR-091)"
+type = "forbidden"
+source_modules = ["lefi_brain.modules.robotics"]
+forbidden_modules = ["lefi_brain.modules.assistant", "lefi_brain.modules.vision", "lefi_brain.modules.cameras", "lefi_brain.modules.plants", "lefi_brain.modules.field_devices"]
+
+[[tool.importlinter.contracts]]
+name = "Lefi AI assistant never reaches robotics (ADR-091): no robot tool exists"
+type = "forbidden"
+source_modules = ["lefi_brain.modules.assistant", "lefi_brain.workflows.assistant_tools"]
+forbidden_modules = ["lefi_brain.modules.robotics"]
+
+[[tool.importlinter.contracts]]
+name = "ADR-002 layers inside every module"
+type = "layers"
+containers = ["lefi_brain.modules.audit", "lefi_brain.modules.identity", "lefi_brain.modules.client_devices", "lefi_brain.modules.plants", "lefi_brain.modules.field_devices", "lefi_brain.modules.assistant", "lefi_brain.modules.plant_health", "lefi_brain.modules.alerts", "lefi_brain.modules.notifications", "lefi_brain.modules.cameras", "lefi_brain.modules.knowledge", "lefi_brain.modules.vision", "lefi_brain.modules.tasks", "lefi_brain.modules.reviews", "lefi_brain.modules.robotics", "lefi_brain.modules.insights", "lefi_brain.modules.shifts", "lefi_brain.modules.handover", "lefi_brain.modules.escalation"]
+layers = ["(api)", "infrastructure", "application", "domain"]

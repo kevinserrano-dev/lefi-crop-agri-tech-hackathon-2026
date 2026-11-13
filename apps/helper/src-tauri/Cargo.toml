@@ -1,0 +1,52 @@
+[package]
+name = "lefi-helper"
+version = "0.5.25"
+description = "Lefi Crop Helper — guided installer for LEFI CROP AI (ADR-030)"
+license = "MIT"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[lib]
+name = "lefi_helper_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+url = "2"
+# The bash installer is a child process; its NDJSON events are read line by line.
+tokio = { version = "1", features = ["process", "io-util", "sync", "macros", "net", "time"] }
+# Activation codes: verification only (the signing side is the staff tool's `issue` feature).
+lefi-license = { path = "../../../tools/lefi-license" }
+# LEFI root CA (INSTALLER.md §10.1): its fingerprint is the installation id.
+rcgen = "0.13"
+# The Lefi Crop Helper service (main PC / satellite) and its console API client (loopback HTTP).
+lefi-helperd = { path = "../helperd" }
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
+# macOS notifications for available updates (ADR-035).
+tauri-plugin-notification = "2"
+time = "0.3"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+axum = { version = "0.8", default-features = false, features = ["http1", "json", "tokio"] }
+tempfile = "3"
+lefi-license = { path = "../../../tools/lefi-license", features = ["issue"] }
+tokio = { version = "1", features = ["process", "io-util", "sync", "macros", "rt-multi-thread"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
+
+[features]
+# Packaged build for the hackathon judges: activates without a code from Lefi Crop.
+hackathon = ["lefi-license/issue"]

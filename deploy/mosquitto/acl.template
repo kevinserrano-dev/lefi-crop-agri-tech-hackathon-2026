@@ -1,0 +1,37 @@
+# LEFI CROP — MQTT ACL. Rendered into {{STATE_DIR}}/mosquitto/acl.
+# Each ESP32 authenticates with username == device_id and can ONLY touch its own subtree,
+# so a message can never target (or impersonate) another physical device.
+
+# Brain: full access to the v1 namespace.
+user lefi-brain
+topic readwrite lefi/v1/#
+# Broker health counters for `lefi mqtt status|stats`.
+topic read $SYS/#
+
+# Telemetry simulator: emulates devices and the robot bridge (SIMULATED data only).
+user lefi-sim
+topic readwrite lefi/v1/devices/#
+topic readwrite lefi/v1/robots/#
+
+# Robot simulation bridge.
+user lefi-robot
+topic read lefi/v1/robots/+/missions
+topic write lefi/v1/robots/+/progress
+topic write lefi/v1/robots/+/status
+
+# Every device user (%u = MQTT username = device_id).
+pattern write lefi/v1/devices/%u/announce
+pattern write lefi/v1/devices/%u/status
+pattern write lefi/v1/devices/%u/heartbeat
+pattern write lefi/v1/devices/%u/telemetry
+pattern write lefi/v1/devices/%u/events
+pattern write lefi/v1/devices/%u/logs
+pattern write lefi/v1/devices/%u/acks
+pattern read  lefi/v1/devices/%u/commands
+
+# A board without its own account asks to join (ADR-058) as user `lefi-enrol` (created by Lefi
+# Brain) with client id `enrol-<hardware id>`: it can only write its own request and read its own
+# answer, which is sealed to the board's key. Lefi Brain accepts nothing without a person who
+# types the claim code read from the board.
+pattern write lefi/v1/enrol/%c/request
+pattern read  lefi/v1/enrol/%c/response

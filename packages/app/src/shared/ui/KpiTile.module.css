@@ -1,0 +1,22 @@
+.row {
+  display: grid;
+  gap: 12px;
+}
+.kpi {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kpi span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lefi-text-muted);
+}
+.kpi b {
+  font: 600 24px var(--lefi-font-display);
+  color: var(--lefi-text);
+}

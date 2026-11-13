@@ -1,0 +1,74 @@
+{
+  "_comment": "Simulated greenhouse for the MH3 bridge. Every place here is SIMULATED: stations are spots in the 3D scene, not registered plants. Metres; x forward from the robot's start, y to its left, yaw in degrees (0 = +x, 90 = +y).",
+  "id": "sim-greenhouse-1",
+  "name": "Simulated greenhouse",
+  "bounds": { "x_min": -1.5, "x_max": 6.5, "y_min": -2.6, "y_max": 2.6 },
+  "start": { "x": 0.0, "y": 0.0, "yaw_deg": 0.0 },
+  "benches": [
+    {
+      "id": "bench-a",
+      "label": "Bench A",
+      "x": 3.0,
+      "y": 1.25,
+      "length": 4.4,
+      "width": 0.8,
+      "height": 0.75
+    },
+    {
+      "id": "bench-b",
+      "label": "Bench B",
+      "x": 3.0,
+      "y": -1.25,
+      "length": 4.4,
+      "width": 0.8,
+      "height": 0.75
+    }
+  ],
+  "stations": [
+    {
+      "id": "sim-p1",
+      "label": "Plant 1",
+      "bench": "bench-a",
+      "x": 1.6,
+      "y": 1.1,
+      "kind": "lettuce",
+      "approach": { "x": 1.6, "y": 0.5, "yaw_deg": 90 }
+    },
+    {
+      "id": "sim-p2",
+      "label": "Plant 2",
+      "bench": "bench-a",
+      "x": 3.4,
+      "y": 1.1,
+      "kind": "tomato",
+      "approach": { "x": 3.4, "y": 0.5, "yaw_deg": 90 }
+    },
+    {
+      "id": "sim-p3",
+      "label": "Plant 3",
+      "bench": "bench-b",
+      "x": 2.5,
+      "y": -1.1,
+      "kind": "basil",
+      "approach": { "x": 2.5, "y": -0.5, "yaw_deg": -90 }
+    },
+    {
+      "id": "dock",
+      "label": "Charging dock",
+      "kind": "dock",
+      "x": -0.75,
+      "y": 0.0,
+      "approach": { "x": 0.0, "y": 0.0, "yaw_deg": 0 }
+    }
+  ],
+  "decor_plants": [
+    { "x": 2.2, "y": 1.4, "kind": "lettuce" },
+    { "x": 2.8, "y": 1.1, "kind": "basil" },
+    { "x": 4.1, "y": 1.4, "kind": "lettuce" },
+    { "x": 4.7, "y": 1.1, "kind": "tomato" },
+    { "x": 1.4, "y": -1.4, "kind": "lettuce" },
+    { "x": 3.3, "y": -1.4, "kind": "tomato" },
+    { "x": 4.0, "y": -1.1, "kind": "lettuce" },
+    { "x": 4.7, "y": -1.4, "kind": "basil" }
+  ]
+}

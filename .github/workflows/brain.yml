@@ -1,0 +1,27 @@
+name: Brain
+
+on:
+  push:
+    paths: ["services/brain/**", "packages/contracts/**", "packages/api/openapi/**", ".github/workflows/brain.yml"]
+  pull_request:
+    paths: ["services/brain/**", "packages/contracts/**", "packages/api/openapi/**", ".github/workflows/brain.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/brain
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv python install 3.12
+      - run: uv sync --locked --python 3.12
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      - run: uv run lint-imports
+      - run: uv run pytest

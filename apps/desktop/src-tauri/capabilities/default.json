@@ -1,0 +1,24 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Main window: the app's own commands, event listening and local notifications only. No fs, no shell, no http plugin.",
+  "windows": ["main"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "allow-api-request",
+    "allow-discover-brain",
+    "allow-find-brains",
+    "allow-device-identity",
+    "allow-pair-device",
+    "allow-forget-pairing",
+    "allow-pairing-status",
+    "allow-secret-get",
+    "allow-secret-set",
+    "allow-secret-del",
+    "allow-camera-stream",
+    "allow-camera-stream-stop",
+    "allow-robot-stream",
+    "notification:default"
+  ]
+}

@@ -1,0 +1,386 @@
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.headerText h1 {
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+.headerText span {
+  font-size: 13.5px;
+  color: var(--lefi-text-secondary);
+}
+.focus {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 16px;
+}
+.row3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.muted {
+  font-size: 12px;
+  color: var(--lefi-text-muted);
+}
+.cardLink {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.titleWithTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tileLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+}
+
+/* Health score */
+.scoreTile {
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+}
+.ringValue {
+  font: 600 28px var(--lefi-font-display);
+}
+.ringSub {
+  font-size: 10px;
+  color: var(--lefi-green-200);
+}
+.scoreText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scoreLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lefi-green-200);
+}
+.scoreBody {
+  font-size: 13px;
+  color: #dcede3;
+  line-height: 1.5;
+}
+
+/* Plant condition */
+.conditionTile {
+  gap: 12px;
+}
+.conditionBar {
+  display: flex;
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  gap: 2px;
+}
+.conditionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.conditionGrid > div {
+  display: flex;
+  flex-direction: column;
+}
+.conditionValue {
+  font: 600 17px var(--lefi-font-display);
+}
+.conditionLabel {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+
+/* Lefi summary */
+.lefiCard {
+  flex-direction: row;
+  gap: 18px;
+  align-items: flex-start;
+}
+.lefiMascot {
+  width: 92px;
+  height: auto;
+  flex-shrink: 0;
+}
+.lefiBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.lefiHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lefiTitle {
+  font: 600 16px var(--lefi-font-display);
+  color: var(--lefi-text);
+}
+.lefiText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #2b3833;
+  text-wrap: pretty;
+}
+.lefiActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lefiNote {
+  font-size: 11.5px;
+  color: #7b8781;
+}
+
+/* Sensors */
+.sensorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+.sensor {
+  border: 1px solid #e8ede9;
+  border-radius: var(--lefi-radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  background: #fff;
+}
+.sensor[data-status='CRITICAL'] {
+  background: #fff8f7;
+}
+.sensorHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.sensorLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4c5a54;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sensorValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
+  font: 600 24px var(--lefi-font-display);
+  color: var(--lefi-text);
+}
+.sensorUnit {
+  font: 500 11.5px var(--lefi-font-body);
+  color: var(--lefi-text-muted);
+}
+.sensorFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--lefi-text-muted);
+  white-space: nowrap;
+}
+.lockTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--lefi-off-bg);
+  color: var(--lefi-off-fg);
+}
+.disabledValue {
+  color: var(--lefi-off-fg);
+}
+.flatLine {
+  height: 28px;
+  border-bottom: 1.6px dashed var(--lefi-off-dot);
+  margin-bottom: 14px;
+}
+.placeholderNote {
+  font-size: 11.5px;
+  color: var(--lefi-warn-fg);
+}
+
+/* Tasks */
+.taskRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid var(--lefi-border-row);
+}
+.taskDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.taskText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.taskTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lefi-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.taskMeta {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.taskPriority {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+/* Robot */
+.robot {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.robotMascot {
+  width: 76px;
+  height: auto;
+}
+.robotText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.robotName {
+  font: 600 15px var(--lefi-font-display);
+  color: var(--lefi-text);
+}
+.robotMode {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.robotDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--lefi-text-secondary);
+}
+.batteryTrack {
+  width: 80px;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--lefi-skeleton);
+  overflow: hidden;
+}
+.batteryTrack div {
+  height: 100%;
+  background: var(--lefi-green-400);
+}
+.facts {
+  background: var(--lefi-surface-muted);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 12px;
+}
+.facts div {
+  display: flex;
+  flex-direction: column;
+}
+.facts span {
+  color: var(--lefi-text-muted);
+}
+.facts b {
+  color: var(--lefi-text);
+}
+
+/* Shift */
+.crew {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatars {
+  display: flex;
+}
+.avatarRing {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-right: -8px;
+}
+.crewCount {
+  font-size: 12.5px;
+  color: var(--lefi-text-strong);
+  font-weight: 600;
+  margin-left: 8px;
+}
+.activityRow {
+  display: flex;
+  gap: 10px;
+  font-size: 12.5px;
+  padding-top: 8px;
+  border-top: 1px solid var(--lefi-border-row);
+  color: var(--lefi-text-strong);
+  line-height: 1.45;
+}
+.activityTime {
+  font: 500 11px var(--lefi-font-mono);
+  color: var(--lefi-text-faint);
+  width: 38px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}

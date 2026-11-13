@@ -1,0 +1,9 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 8,
+  "uptime_ms": 80000,
+  "origin": "SIMULATED",
+  "reset_reason": "cosmic_ray"
+}

@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 4,
+  "uptime_ms": 12000,
+  "origin": "SIMULATED",
+  "lines": [
+    {
+      "t": 1,
+      "level": "verbose",
+      "msg": "hi"
+    }
+  ]
+}

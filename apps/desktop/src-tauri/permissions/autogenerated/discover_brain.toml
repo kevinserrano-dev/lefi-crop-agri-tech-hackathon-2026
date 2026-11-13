@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-discover-brain"
+description = "Enables the discover_brain command without any pre-configured scope."
+commands.allow = ["discover_brain"]
+
+[[permission]]
+identifier = "deny-discover-brain"
+description = "Denies the discover_brain command without any pre-configured scope."
+commands.deny = ["discover_brain"]

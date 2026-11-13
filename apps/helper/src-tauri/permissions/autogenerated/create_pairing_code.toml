@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-create-pairing-code"
+description = "Enables the create_pairing_code command without any pre-configured scope."
+commands.allow = ["create_pairing_code"]
+
+[[permission]]
+identifier = "deny-create-pairing-code"
+description = "Denies the create_pairing_code command without any pre-configured scope."
+commands.deny = ["create_pairing_code"]

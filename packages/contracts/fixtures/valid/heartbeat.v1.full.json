@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 8,
+  "uptime_ms": 80000,
+  "origin": "SIMULATED",
+  "rssi_dbm": -71,
+  "free_heap": 150000,
+  "firmware": "0.0.0-fixture",
+  "min_free_heap": 120000,
+  "reset_reason": "watchdog",
+  "wifi_channel": 6,
+  "wifi_reconnects": 2,
+  "wifi_last_reason": 201,
+  "mqtt_reconnects": 3,
+  "mqtt_last_rc": 0,
+  "telemetry_sent": 80,
+  "telemetry_failed": 1,
+  "telemetry_skipped_offline": 12,
+  "max_loop_ms": 48,
+  "ip": "192.168.8.51"
+}

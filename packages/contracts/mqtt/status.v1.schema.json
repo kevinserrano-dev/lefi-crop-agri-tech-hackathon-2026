@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/status.v1.schema.json",
+  "title": "Device connection status v1",
+  "description": "Topic lefi/v1/devices/{device_id}/status. QoS 1, retained. The device publishes online after connecting; the broker publishes the same message with state offline as the device's Last Will when the connection drops.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "device_id", "state"],
+  "properties": {
+    "v": { "const": 1 },
+    "device_id": { "$ref": "common.v1.schema.json#/$defs/device_id" },
+    "state": { "enum": ["online", "offline"] },
+    "boot_id": { "$ref": "common.v1.schema.json#/$defs/boot_id" }
+  }
+}

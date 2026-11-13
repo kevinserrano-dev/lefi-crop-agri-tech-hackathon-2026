@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-erase-this-pc"
+description = "Enables the erase_this_pc command without any pre-configured scope."
+commands.allow = ["erase_this_pc"]
+
+[[permission]]
+identifier = "deny-erase-this-pc"
+description = "Denies the erase_this_pc command without any pre-configured scope."
+commands.deny = ["erase_this_pc"]

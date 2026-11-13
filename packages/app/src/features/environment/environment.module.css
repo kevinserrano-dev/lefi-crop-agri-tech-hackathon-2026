@@ -1,0 +1,376 @@
+.muted {
+  font-size: 12px;
+  color: var(--lefi-text-muted);
+}
+.mono {
+  font: 500 11.5px var(--lefi-font-mono);
+  color: var(--lefi-text);
+}
+.strong {
+  font-weight: 600;
+}
+.rowGap {
+  display: flex;
+  gap: 8px;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.legend {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--lefi-text-secondary);
+  align-items: center;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Metric cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+.card {
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  min-width: 0;
+}
+.card[data-critical='true'] {
+  background: #fff8f7;
+}
+.card[aria-pressed='true'] {
+  border-color: var(--lefi-green-400);
+  box-shadow: 0 0 0 3px rgba(84, 185, 133, 0.18);
+}
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.cardLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4c5a54;
+}
+.cardValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font: 600 24px var(--lefi-font-display);
+  color: var(--lefi-text);
+}
+.unit {
+  font: 500 11px var(--lefi-font-body);
+  color: var(--lefi-text-muted);
+}
+.cardStatus {
+  font-size: 11px;
+  font-weight: 700;
+}
+.cardLast {
+  font: 500 10.5px var(--lefi-font-mono);
+  color: var(--lefi-text-faint);
+}
+
+/* Main row */
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(280px, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.estimate {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--lefi-sim-fg);
+  background: #f3effa;
+  border-radius: var(--lefi-radius-md);
+  padding: 9px 12px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  border-top: 1px solid var(--lefi-border-soft);
+  padding-top: 12px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat span {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.stat b {
+  font: 600 16px var(--lefi-font-display);
+}
+.unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 12px;
+  text-align: center;
+}
+.unavailable img {
+  width: 130px;
+}
+.unavailableTitle {
+  font: 600 17px var(--lefi-font-display);
+}
+
+/* Side cards */
+.side {
+  padding: 18px;
+}
+.sideHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sideTitle {
+  font: 600 15px var(--lefi-font-display);
+}
+.pump {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pumpIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--lefi-off-bg);
+  color: var(--lefi-off-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pumpText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: var(--lefi-text-muted);
+}
+.pumpText b {
+  font-size: 14px;
+  color: var(--lefi-text);
+}
+.connRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--lefi-border-row);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.connText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Operating ranges */
+.ranges {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  overflow: hidden;
+}
+.rangesHead {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.rangesTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rangesTitle > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 16px var(--lefi-font-display);
+}
+.rangesHeader,
+.rangesRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 10px 20px;
+  align-items: center;
+}
+.rangesHeader {
+  background: var(--lefi-surface-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+}
+.rangesRow {
+  border-top: 1px solid var(--lefi-border-soft);
+  font-size: 13px;
+}
+.rangesRow .mono {
+  font-size: 13px;
+}
+.rangeInput {
+  height: 32px;
+  width: 100px;
+  border: 1px solid var(--lefi-border-brand);
+  border-radius: 8px;
+  padding: 0 10px;
+  font: 500 13px var(--lefi-font-mono);
+}
+.miniGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.miniCard {
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.miniCard:hover {
+  border-color: var(--lefi-green-400);
+}
+.miniHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.miniHead .strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* A zone's sensors inside Greenhouses & Crops (ADR-092). */
+.zonePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.zonePanelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Ranges of the zone: species and people's rules (ADR-097). */
+.rangeActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cropChips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cropChip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--lefi-warn-bd, #f1d9a6);
+  background: var(--lefi-warn-bg, #fdf6e7);
+  color: var(--lefi-warn-fg, #8a5a00);
+}
+.cropChip[data-ok='true'] {
+  border-color: var(--lefi-ok-bd, #cfe8d8);
+  background: var(--lefi-ok-bg, #eef8f1);
+  color: var(--lefi-ok-fg, #2e7d4f);
+}
+.cropText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  color: var(--lefi-text, #1f2a24);
+}
+.speciesHeader,
+.speciesRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 0.8fr;
+  gap: 8px;
+  padding: 8px 12px;
+  align-items: center;
+}
+.speciesHeader {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--lefi-text-muted);
+}
+.speciesRow {
+  border-top: 1px solid var(--lefi-border-row, #eef0f2);
+  font-size: 13px;
+}
+.subTitle {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 8px;
+}

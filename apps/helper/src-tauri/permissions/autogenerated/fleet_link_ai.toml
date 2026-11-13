@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-fleet-link-ai"
+description = "Enables the fleet_link_ai command without any pre-configured scope."
+commands.allow = ["fleet_link_ai"]
+
+[[permission]]
+identifier = "deny-fleet-link-ai"
+description = "Denies the fleet_link_ai command without any pre-configured scope."
+commands.deny = ["fleet_link_ai"]

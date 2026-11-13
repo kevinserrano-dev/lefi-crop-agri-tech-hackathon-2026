@@ -1,0 +1,58 @@
+.select {
+  height: 32px;
+  border: 1px solid var(--lefi-border-control);
+  border-radius: 8px;
+  padding: 0 8px;
+  font-size: 12.5px;
+  background: #fff;
+  color: var(--lefi-text);
+}
+.select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  border: 1px solid var(--lefi-border-control);
+  background: #fff;
+  border-radius: var(--lefi-radius-md);
+  padding: 0 10px;
+  width: 220px;
+}
+.search input {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  background: transparent;
+}
+.textarea {
+  min-height: 70px;
+  border: 1px solid var(--lefi-border-input);
+  border-radius: var(--lefi-radius-md);
+  padding: 9px 11px;
+  font-size: 13px;
+  resize: vertical;
+  font-family: inherit;
+}
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--lefi-text-strong);
+}
+.formField input,
+.formField select {
+  height: 36px;
+  border: 1px solid var(--lefi-border-input);
+  border-radius: 9px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: #fff;
+}

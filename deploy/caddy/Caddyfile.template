@@ -1,0 +1,35 @@
+# LEFI CROP — Caddy: serves the static admin build and proxies the Brain API on the
+# same origin (no CORS). Rendered by scripts/install.sh into {{STATE_DIR}}/caddy/Caddyfile.
+{
+	admin localhost:2019
+	{{GLOBAL_TLS}}
+}
+
+{{SITE_ADDRESS}} {
+	{{SITE_TLS}}
+	encode zstd gzip
+	log {
+		output file {{STATE_DIR}}/logs/caddy-access.log {
+			roll_size 10MiB
+			roll_keep 5
+		}
+		format json
+	}
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy no-referrer
+	}
+	handle /api/* {
+		reverse_proxy {{BRAIN_UPSTREAM}} {
+			# SHA-256 of the client certificate Caddy verified (empty without one). Set here, so a
+			# client can never send its own; Lefi Brain believes it only from loopback (ADR-048).
+			header_up X-Client-Cert-Fingerprint "{http.request.tls.client.fingerprint}"
+		}
+	}
+	handle {
+		root * {{ADMIN_ROOT}}
+		try_files {path} {path}.html /index.html
+		file_server
+	}
+}

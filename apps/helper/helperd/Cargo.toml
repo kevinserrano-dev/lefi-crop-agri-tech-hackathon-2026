@@ -1,0 +1,48 @@
+[package]
+name = "lefi-helperd"
+version = "0.5.25"
+description = "Lefi Crop Helper service: main PC coordinator and satellite agent (ADR-031, ADR-033)"
+license = "MIT"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[lib]
+name = "lefi_helperd"
+path = "src/lib.rs"
+
+[[bin]]
+name = "lefi-helperd"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "fs", "sync", "signal", "process"] }
+axum = { version = "0.8", default-features = false, features = ["http1", "json", "tokio", "query"] }
+hyper = { version = "1", features = ["http1", "server"] }
+hyper-util = { version = "0.1", features = ["tokio", "server", "http1", "service"] }
+tower = { version = "0.5", features = ["util"] }
+# TLS with the ring provider only (no cmake/C toolchain needed on a customer Mac).
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "tls12"] }
+rustls-pemfile = "2"
+rcgen = { version = "0.13", features = ["x509-parser", "pem"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls-manual-roots-no-provider", "json", "http2"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+getrandom = "0.2"
+time = { version = "0.3", features = ["formatting"] }
+lefi-license = { path = "../../../tools/lefi-license" }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
+
+[features]
+# Built for the hackathon package: the main PC also trusts the public development licence key.
+hackathon = []

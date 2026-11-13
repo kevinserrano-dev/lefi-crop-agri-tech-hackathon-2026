@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Lefi Crop AI — command line interface for technicians.
+# Usage: lefi help   ·   install globally: lefi cli install
+# Compatible with macOS bash 3.2. Commands shown depend on what is installed on this machine.
+
+set -o pipefail
+
+# Resolve the real location (the global command is a symlink to this file).
+_src="${BASH_SOURCE[0]}"
+while [ -L "$_src" ]; do
+  _dir="$(cd -P "$(dirname "$_src")" && pwd)"
+  _src="$(readlink "$_src")"
+  case "$_src" in /*) ;; *) _src="$_dir/$_src" ;; esac
+done
+LEFI_ROOT="$(cd -P "$(dirname "$_src")/.." && pwd)"
+export LEFI_ROOT
+
+# Linux system install (ADR-029): state belongs to the service user `lefi`, so every command
+# except help/version/setup/check runs as that user (root → runuser, others → sudo -u lefi).
+# The operator's name is kept for the audit trail (LEFI_CLI_USER).
+if [ "$(uname -s)" = Linux ] && grep -qx 'LEFI_SERVICE_MODE=systemd' /etc/lefi-crop/install.conf 2>/dev/null; then
+  _svc_user="$(sed -n 's/^SERVICE_USER=//p' /etc/lefi-crop/install.conf)"; _svc_user="${_svc_user:-lefi}"
+  case "${1:-help}" in
+    help|-h|--help|version|--version|setup|install|check|doctor) ;;
+    *)
+      if [ "$(id -un)" != "$_svc_user" ]; then
+        _op="${LEFI_CLI_USER:-${SUDO_USER:-$(id -un)}}"
+        if [ "$(id -u)" = 0 ]; then
+          cd / && exec runuser -u "$_svc_user" -- env LEFI_CLI_USER="$_op" "$_src" "$@"
+        fi
+        command -v sudo >/dev/null 2>&1 || { echo "lefi: run as root or as $_svc_user (sudo is not installed)" >&2; exit 3; }
+        cd / && exec sudo -u "$_svc_user" -- env LEFI_CLI_USER="$_op" "$_src" "$@"
+      fi ;;
+  esac
+fi
+
+for _lib in common detect hwscan recommend system robot_sim role_ai role_core role_admin role_optional role_desktop verify; do
+  # shellcheck source=/dev/null
+  . "$LEFI_ROOT/scripts/lib/$_lib.sh"
+done
+for _mod in base services ai aiops hw mqtt db backup admin brain audit user logs net cliinstall robot; do
+  # shellcheck source=/dev/null
+  . "$LEFI_ROOT/scripts/cli/$_mod.sh"
+done
+
+cli_main "$@"

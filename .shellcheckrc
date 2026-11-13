@@ -1,0 +1,6 @@
+# Lefi Crop AI shell scripts (installer + CLI). Run: make lint-shell
+shell=bash
+external-sources=true
+# Intentional patterns: dynamic sourcing, cross-file globals, A && B || C one-liners,
+# ls on controlled names, filtered ps output, literal $SYS/$PATH strings.
+disable=SC1090,SC1091,SC2034,SC2154,SC2015,SC2012,SC2009,SC2016,SC2153,SC2094

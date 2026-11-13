@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-install-session"
+description = "Enables the install_session command without any pre-configured scope."
+commands.allow = ["install_session"]
+
+[[permission]]
+identifier = "deny-install-session"
+description = "Denies the install_session command without any pre-configured scope."
+commands.deny = ["install_session"]

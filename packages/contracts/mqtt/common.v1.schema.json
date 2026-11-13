@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/common.v1.schema.json",
+  "title": "Shared definitions for Lefi Crop MQTT v1",
+  "$defs": {
+    "device_id": {
+      "type": "string",
+      "pattern": "^(sim-)?[a-z0-9][a-z0-9-]{1,30}[a-z0-9]$",
+      "description": "Assigned by Lefi Brain when the device is added (e.g. esp32-01). The sim- prefix marks a simulated device."
+    },
+    "sensor_key": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,30}[a-z0-9]$",
+      "description": "Fixed channel key from the node profile (packages/contracts/hardware). Sensor id in Lefi Brain = {device_id}:{sensor_key}."
+    },
+    "origin": {
+      "enum": ["LIVE", "SIMULATED"],
+      "description": "ADR-012. Real firmware always sends LIVE; the simulator always SIMULATED."
+    },
+    "boot_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8,32}$",
+      "description": "Random hex created at each boot (ADR-008)."
+    },
+    "seq": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+    "uptime_ms": { "type": "integer", "minimum": 0 }
+  }
+}

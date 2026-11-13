@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-fleet-update-service"
+description = "Enables the fleet_update_service command without any pre-configured scope."
+commands.allow = ["fleet_update_service"]
+
+[[permission]]
+identifier = "deny-fleet-update-service"
+description = "Denies the fleet_update_service command without any pre-configured scope."
+commands.deny = ["fleet_update_service"]

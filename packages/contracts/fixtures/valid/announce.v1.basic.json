@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "profile": "lefi-node-esp32.v1",
+  "firmware": "0.0.0-fixture",
+  "mac": "02:00:00:00:00:01",
+  "boot_id": "deadbeef",
+  "origin": "SIMULATED",
+  "channels": [
+    { "sensor_key": "air-1", "detected": true },
+    { "sensor_key": "soil-temp-1", "detected": false, "detail": "no 1-Wire ROM found" },
+    { "sensor_key": "tds-1", "detected": null }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "device_id": "esp32-test",
+  "boot_id": "0a1b2c3d",
+  "seq": 8,
+  "uptime_ms": 10013,
+  "origin": "LIVE",
+  "ts_synced": false,
+  "readings": [
+    { "sensor_key": "air-1", "variable": "air_temperature", "value": 22.4 },
+    { "sensor_key": "air-1", "variable": "air_humidity", "value": 61.5 },
+    { "sensor_key": "water-temp-1", "variable": "water_temperature", "value": 19.5 },
+    { "sensor_key": "tds-1", "variable": "water_tds", "value": 312.44 }
+  ]
+}

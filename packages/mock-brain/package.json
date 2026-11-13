@@ -1,0 +1,14 @@
+{
+  "name": "@lefi/mock-brain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Development-only fake Brain. Every value it serves is fake and marked SIMULATED.",
+  "scripts": {
+    "start": "node src/server.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}

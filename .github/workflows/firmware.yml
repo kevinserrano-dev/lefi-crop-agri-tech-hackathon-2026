@@ -1,0 +1,22 @@
+name: Firmware
+
+on:
+  push:
+    paths: ["firmware/**", ".github/workflows/firmware.yml"]
+  pull_request:
+    paths: ["firmware/**", ".github/workflows/firmware.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: firmware/esp32-node
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      # Every layout built against board.example.h (placeholder network values): nothing is flashed.
+      - run: uvx --python 3.12 --from platformio pio run -e dual -e single-tds -e single -e dual-tds -e custom

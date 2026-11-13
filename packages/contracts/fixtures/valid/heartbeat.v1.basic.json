@@ -1,0 +1,1 @@
+{ "v": 1, "device_id": "sim-esp32-test", "boot_id": "deadbeef", "seq": 7, "uptime_ms": 70000, "origin": "SIMULATED", "rssi_dbm": -60, "free_heap": 100000, "firmware": "0.0.0-fixture" }

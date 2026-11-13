@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/event.v1.schema.json",
+  "title": "Device event v1",
+  "description": "Topic lefi/v1/devices/{device_id}/events. QoS 1, not retained. A fact that just happened on the board (ADR-059), so Lefi Brain can raise alerts without guessing from missing data. Own seq counter per boot. At most 6 per minute per type; state changes use hysteresis or 3 confirmations. A Wi-Fi drop cannot be sent while it lasts: it is reported as wifi_restored with down_ms.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "device_id",
+    "boot_id",
+    "seq",
+    "uptime_ms",
+    "origin",
+    "type",
+    "severity"
+  ],
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "device_id": {
+      "$ref": "common.v1.schema.json#/$defs/device_id"
+    },
+    "boot_id": {
+      "$ref": "common.v1.schema.json#/$defs/boot_id"
+    },
+    "seq": {
+      "$ref": "common.v1.schema.json#/$defs/seq"
+    },
+    "uptime_ms": {
+      "$ref": "common.v1.schema.json#/$defs/uptime_ms"
+    },
+    "origin": {
+      "$ref": "common.v1.schema.json#/$defs/origin"
+    },
+    "type": {
+      "enum": [
+        "boot",
+        "sensor_lost",
+        "sensor_recovered",
+        "sensor_errors",
+        "wifi_restored",
+        "mqtt_restored",
+        "rssi_weak",
+        "rssi_ok",
+        "heap_low",
+        "loop_slow"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "info",
+        "warn",
+        "crit"
+      ]
+    },
+    "sensor_key": {
+      "$ref": "common.v1.schema.json#/$defs/sensor_key",
+      "description": "Required for sensor_* types"
+    },
+    "error": {
+      "enum": [
+        "not_detected",
+        "read_failed",
+        "out_of_range",
+        "crc"
+      ],
+      "description": "sensor_errors: which error"
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "down_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "sensor_recovered, wifi_restored, mqtt_restored"
+    },
+    "reset_reason": {
+      "enum": [
+        "power_on",
+        "software",
+        "panic",
+        "watchdog",
+        "brownout",
+        "deep_sleep",
+        "other"
+      ]
+    },
+    "wifi_last_reason": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "mqtt_last_rc": {
+      "type": "integer",
+      "minimum": -32768,
+      "maximum": 32767
+    },
+    "rssi_dbm": {
+      "type": "integer",
+      "minimum": -127,
+      "maximum": 0
+    },
+    "free_heap": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_loop_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "suppressed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Events of this type not sent because of the rate limit since the last one"
+    },
+    "detail": {
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "sensor_lost",
+              "sensor_recovered",
+              "sensor_errors"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "sensor_key"
+        ]
+      }
+    }
+  ]
+}

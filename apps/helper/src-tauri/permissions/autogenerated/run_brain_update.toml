@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-run-brain-update"
+description = "Enables the run_brain_update command without any pre-configured scope."
+commands.allow = ["run_brain_update"]
+
+[[permission]]
+identifier = "deny-run-brain-update"
+description = "Denies the run_brain_update command without any pre-configured scope."
+commands.deny = ["run_brain_update"]

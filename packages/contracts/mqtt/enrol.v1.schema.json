@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/enrol.v1.schema.json",
+  "title": "Enrolment request v1",
+  "description": "Topic lefi/v1/enrol/{client_id}/request, client_id = enrol-<hardware_id as 12 lowercase hex>. MQTT user lefi-enrol, QoS 1, not retained, sent every 30 s until answered (ADR-058). A board without its own account asks to join; a person accepts it in Lefi Desktop only with the claim code the board prints (first 60 bits of SHA-256('lefi-claim-v1' || public_key), base32). The answer on lefi/v1/enrol/{client_id}/response is {v, hardware_id, alg: 'ECDH-P256+HKDF-SHA256+A256GCM', epk, nonce, ct}: the board's credentials sealed to public_key (HKDF salt 'lefi-enrol-v1', info and AES-GCM associated data = client_id).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "hardware_id",
+    "profile",
+    "firmware",
+    "network",
+    "mac",
+    "public_key"
+  ],
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "hardware_id": {
+      "description": "The chip's base MAC (eFuse)",
+      "type": "string",
+      "pattern": "^([0-9A-F]{2}:){5}[0-9A-F]{2}$"
+    },
+    "profile": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.v[0-9]+$"
+    },
+    "firmware": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "network": {
+      "enum": [
+        "wifi",
+        "ethernet"
+      ]
+    },
+    "mac": {
+      "description": "MAC of the interface it joined with",
+      "type": "string",
+      "pattern": "^([0-9A-F]{2}:){5}[0-9A-F]{2}$"
+    },
+    "public_key": {
+      "description": "P-256 public key, SEC1 uncompressed (65 bytes), base64",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9+/]{86}[A-Za-z0-9+/=]{2}$"
+    }
+  }
+}

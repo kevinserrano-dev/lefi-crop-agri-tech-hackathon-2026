@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--lefi-bg);
+  color: var(--lefi-text-body);
+  font-family: var(--lefi-font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--lefi-green-600);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--lefi-forest-800);
+  text-decoration: underline;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--lefi-font-display);
+  font-weight: 600;
+  color: var(--lefi-text);
+}
+:focus-visible {
+  outline: 2px solid var(--lefi-green-400);
+  outline-offset: 2px;
+}

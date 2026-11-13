@@ -1,0 +1,22 @@
+name: Shell
+
+on:
+  push:
+    paths: ["bin/**", "scripts/**", "config/supported-models.tsv", "config/model-fit.conf", ".shellcheckrc", ".github/workflows/shell.yml"]
+  pull_request:
+    paths: ["bin/**", "scripts/**", "config/supported-models.tsv", "config/model-fit.conf", ".shellcheckrc", ".github/workflows/shell.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -q shellcheck
+      - run: make lint-shell
+      - run: make test-shell
+      # The same tests under bash 3.2.57 (the macOS default shell), from the official image.
+      - run: |
+          docker run --rm -v "$PWD":/src:ro bash:3.2 bash -c 'for f in /src/bin/lefi /src/scripts/install.sh /src/scripts/lib/*.sh /src/scripts/cli/*.sh /src/scripts/tests/run.sh; do bash -n "$f" || exit 1; done; echo "bash $BASH_VERSION: syntax OK"'

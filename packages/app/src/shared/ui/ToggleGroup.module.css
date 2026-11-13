@@ -1,0 +1,31 @@
+.group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.btn {
+  height: 32px;
+  padding: 0 11px;
+  border-radius: 8px;
+  border: 1px solid var(--lefi-border-control);
+  background: #fff;
+  color: var(--lefi-text-strong);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn[aria-pressed='true'] {
+  background: var(--lefi-forest-800);
+  border-color: var(--lefi-forest-800);
+  color: #fff;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}

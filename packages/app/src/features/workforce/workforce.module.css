@@ -1,0 +1,342 @@
+.faint {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.mono {
+  font: 500 11.5px var(--lefi-font-mono);
+  color: var(--lefi-text-secondary);
+}
+.center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.cardTitle {
+  font: 600 16px var(--lefi-font-display);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tabBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  border-bottom: 1px solid var(--lefi-border);
+  padding-bottom: 8px;
+}
+.tabs {
+  display: flex;
+  gap: 22px;
+}
+.tabs button {
+  border: none;
+  background: none;
+  padding: 10px 0;
+  margin-bottom: -9px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--lefi-text-muted);
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+}
+.tabs button[aria-selected='true'] {
+  color: var(--lefi-text);
+  border-bottom-color: var(--lefi-forest-800);
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.tableCard {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  overflow: hidden;
+  min-width: 0;
+}
+.filters {
+  padding: 14px 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filters > :first-child {
+  flex: 1;
+  min-width: 200px;
+}
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.whoText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 13px;
+}
+.whoText > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.status {
+  justify-self: start;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.empty {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--lefi-text-muted);
+}
+.empty img {
+  width: 90px;
+}
+.panel {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 88px;
+  min-width: 0;
+}
+.head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.name {
+  font: 600 19px var(--lefi-font-display);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--lefi-text-strong);
+}
+.field select {
+  height: 38px;
+  border: 1px solid var(--lefi-border-input);
+  border-radius: 9px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: #fff;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--lefi-text-strong);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  height: 28px;
+  padding: 0 9px;
+  border-radius: 7px;
+  border: 1px solid var(--lefi-border);
+  background: #fff;
+  color: #8a968f;
+  font: 500 11.5px var(--lefi-font-mono);
+  cursor: pointer;
+}
+.chip[aria-pressed='true'] {
+  background: #e6f3eb;
+  color: var(--lefi-forest-800);
+  border-color: #9fd7b8;
+}
+.chip[data-locked='true'] {
+  cursor: not-allowed;
+}
+.notifyGrid {
+  display: grid;
+  grid-template-columns: 1fr 54px 54px 54px;
+  align-items: center;
+  font-size: 12.5px;
+  padding-top: 6px;
+  border-top: 1px solid var(--lefi-border-row);
+}
+.notifyGrid:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--lefi-text-muted);
+}
+.eyebrowCenter {
+  composes: eyebrow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+.recent {
+  font-size: 12px;
+  display: flex;
+  gap: 8px;
+}
+.recent .mono {
+  font-size: 10.5px;
+  color: var(--lefi-text-muted);
+  white-space: nowrap;
+}
+.danger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  border: 1px solid #f0cfcb;
+  background: #fff;
+  border-radius: 9px;
+  color: var(--lefi-crit-fg);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.danger[data-locked='true'] {
+  opacity: 0.6;
+}
+.weekHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--lefi-text-secondary);
+}
+.rosterCard {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  overflow-x: auto;
+}
+.roster {
+  min-width: 980px;
+}
+.rosterHead,
+.rosterRow,
+.coverage {
+  display: grid;
+  grid-template-columns: 210px repeat(7, minmax(90px, 1fr)) 130px;
+  gap: 6px;
+  padding: 6px 16px;
+  align-items: center;
+}
+.rosterHead {
+  padding: 10px 16px;
+  background: var(--lefi-surface-sunken);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+}
+.rosterRow {
+  border-top: 1px solid var(--lefi-border-row);
+}
+.cell {
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-size: 12px;
+}
+.cell span {
+  font: 500 9.5px var(--lefi-font-mono);
+}
+.cell[data-today='true'] {
+  box-shadow: inset 0 0 0 2px #54b985;
+}
+.cell[data-locked='true'] {
+  cursor: default;
+}
+.avail {
+  font-size: 12px;
+}
+.coverage {
+  padding: 10px 16px;
+  border-top: 1px solid var(--lefi-border);
+  background: #fafcfa;
+  font-size: 11.5px;
+  color: var(--lefi-text-secondary);
+}
+.coverage .center {
+  font-family: var(--lefi-font-mono);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.dialogHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialogTitle {
+  font: 600 21px var(--lefi-font-display);
+}
+.close {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--lefi-text-muted);
+}
+.dialogFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

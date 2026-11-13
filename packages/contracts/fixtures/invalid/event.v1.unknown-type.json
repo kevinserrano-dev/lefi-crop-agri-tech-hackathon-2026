@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "device_id": "sim-esp32-test",
+  "boot_id": "deadbeef",
+  "seq": 3,
+  "uptime_ms": 845000,
+  "origin": "SIMULATED",
+  "type": "pump_on",
+  "severity": "info"
+}

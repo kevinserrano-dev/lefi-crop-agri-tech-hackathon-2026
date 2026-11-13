@@ -1,0 +1,681 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0 12px;
+  flex-wrap: wrap;
+}
+.muted {
+  color: var(--lefi-text-muted);
+  font-size: 0.85em;
+}
+.mono {
+  font-family: var(--lefi-font-mono);
+  font-size: 0.85em;
+  color: var(--lefi-text-secondary);
+}
+.values {
+  display: inline-flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px 16px;
+  margin: 4px 0 16px;
+}
+.facts dt {
+  color: var(--lefi-text-muted);
+  font-size: 0.8em;
+}
+.facts dd {
+  margin: 2px 0 0;
+  color: var(--lefi-text-strong);
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.sensor {
+  border: 1px solid var(--lefi-border-soft);
+  border-radius: var(--lefi-radius-md);
+  padding: 12px;
+  margin-bottom: 10px;
+  display: grid;
+  gap: 8px;
+}
+.sensorHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sensorHead b {
+  color: var(--lefi-text-strong);
+}
+.assign {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px 20px;
+}
+.dialogHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 0;
+}
+.dialogHead h2 {
+  margin: 0;
+  font-family: var(--lefi-font-display);
+  font-size: 1.2rem;
+}
+.dialogFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 20px 16px;
+}
+.note {
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+  margin: 0 20px 12px;
+  font-size: 0.9em;
+}
+.secret {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 20px;
+}
+.secret code {
+  font-family: var(--lefi-font-mono);
+  background: var(--lefi-surface-sunken);
+  padding: 6px 8px;
+  border-radius: var(--lefi-radius-md);
+  overflow-wrap: anywhere;
+}
+.places {
+  display: grid;
+  gap: 12px;
+}
+.placeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.placeList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.inline {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.inline input,
+.inline select {
+  flex: 1;
+  min-width: 0;
+}
+.readings {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+.readings td,
+.readings th {
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--lefi-border-row);
+}
+.values[data-unused] b {
+  color: var(--lefi-text-muted);
+  font-weight: 500;
+}
+.inline input,
+.inline select,
+.assign select,
+.facts select {
+  height: 34px;
+  border: 1px solid var(--lefi-border-input);
+  border-radius: 9px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: var(--lefi-surface, #fff);
+  color: var(--lefi-text);
+}
+.dialogTabs {
+  padding: 12px 20px 4px;
+}
+.pad {
+  padding: 0 20px 12px;
+}
+.check {
+  grid-column: span 2;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.92em;
+}
+.check input {
+  margin-top: 3px;
+  flex: none;
+}
+.enrolList {
+  display: grid;
+  gap: 8px;
+  padding: 0 20px 12px;
+  max-height: 300px;
+  overflow: auto;
+}
+.enrolRow {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  border: 1px solid var(--lefi-border-soft);
+  border-radius: var(--lefi-radius-md);
+  background: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.enrolRow[aria-pressed='true'] {
+  border-color: var(--lefi-ok-fg);
+  box-shadow: 0 0 0 1px var(--lefi-ok-fg);
+}
+.sensorOption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--lefi-border-soft);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+}
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+.sectionHead h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.events {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.9em;
+}
+.boardLog {
+  font-family: var(--lefi-font-mono);
+  font-size: 0.8em;
+  background: var(--lefi-surface-sunken);
+  color: var(--lefi-text);
+  border: 1px solid var(--lefi-border-soft);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+  max-height: 320px;
+  overflow: auto;
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+}
+.boardLog [data-level='debug'] {
+  color: var(--lefi-text-muted);
+}
+.boardLog [data-level='warn'] {
+  color: var(--lefi-warn-fg);
+}
+.boardLog [data-level='error'] {
+  color: var(--lefi-crit-fg);
+}
+.group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.group legend {
+  padding: 12px 20px 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.systems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 0 20px 8px;
+}
+.systems > span {
+  flex-basis: 100%;
+}
+.checkInline {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.92em;
+}
+.error {
+  color: var(--lefi-crit-fg, #a12a1f);
+  margin: 0 20px 12px;
+  font-size: 0.9em;
+}
+.treeCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.treeToggle {
+  width: 18px;
+  flex: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+.subhead {
+  margin: 10px 0 4px;
+  font-size: 0.92rem;
+}
+
+.stage {
+  position: relative;
+  background: #0d1f15;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  outline: none;
+}
+.stage:focus-visible {
+  box-shadow: 0 0 0 3px var(--lefi-focus, #6fbf73);
+}
+.stage:fullscreen {
+  border-radius: 0;
+  aspect-ratio: auto;
+}
+.stageMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.stageMedia[data-hidden] {
+  visibility: hidden;
+}
+.stageNote {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  margin: 0;
+  text-align: center;
+  color: #e8efe9;
+  font-size: 0.95em;
+}
+.stageLive {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.stageLive > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e5484d;
+}
+.stageTools {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  gap: 6px;
+}
+.stageTools button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  cursor: pointer;
+}
+.stageTools button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.75);
+}
+.stageTools button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.aiRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  margin: 4px 0 8px;
+  border-radius: 10px;
+  background: var(--lefi-surface-sunken, #f1f5f1);
+}
+.aiRow > span {
+  display: grid;
+  gap: 2px;
+}
+.photoStrip {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 12px;
+}
+.photoThumb {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--lefi-border, #dfe6df);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0d1f15;
+  cursor: pointer;
+  font-size: 0.75em;
+  color: #e8efe9;
+}
+.photoThumb img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.photoThumb > span {
+  padding: 2px 8px 6px;
+  text-align: left;
+}
+.photoFull {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 8px;
+}
+.camControls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.aimPad {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 4px;
+}
+.rowLink {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.rowLink:focus-visible {
+  outline: 2px solid var(--lefi-focus, #6fbf73);
+  border-radius: 6px;
+}
+.sensor[data-open] {
+  border-color: var(--lefi-ok-fg, #2e7d32);
+}
+.checkList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px 12px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border: 1px solid var(--lefi-border, #d9dee3);
+  border-radius: var(--lefi-radius-md);
+}
+.checkList label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
+}
+.factWide {
+  grid-column: 1 / -1;
+}
+/* Devices & Health: compact list + device panel with sections (no long scroll). */
+.devLayout {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .devLayout {
+    grid-template-columns: 1fr;
+  }
+}
+.devList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+.devItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1.5px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-lg);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.devItem:hover {
+  border-color: var(--lefi-green-400);
+}
+.devItem[aria-current='true'] {
+  border-color: var(--lefi-green-400);
+  box-shadow: 0 0 0 3px rgba(84, 185, 133, 0.18);
+}
+.devItemHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.devPanel {
+  min-width: 0;
+}
+.devTabs {
+  margin: 0 0 14px;
+}
+.sensorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+}
+.sensorGrid .sensor {
+  margin-bottom: 0;
+}
+
+/* Zones a camera looks at (ADR-087): check boxes in a wrapping row. */
+.zoneChecks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  border: 0;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.zoneChecks .check {
+  grid-column: auto;
+  align-items: center;
+}
+.zoneChecks .check input {
+  margin-top: 0;
+}
+
+/* Calibration, zone markers and Lefi AI on a photo (ADR-088). */
+.calibration {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  margin: 8px 0 12px;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-md);
+  background: var(--lefi-surface-sunken);
+  font-size: 0.92em;
+}
+.calBar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--lefi-border-soft);
+  overflow: hidden;
+}
+.calBar > div {
+  height: 100%;
+  background: var(--lefi-ok-fg);
+  transition: width 0.4s;
+}
+.calList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.calList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.calList .check {
+  grid-column: auto;
+  align-items: center;
+}
+.markerSheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.marker {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed var(--lefi-border);
+  border-radius: var(--lefi-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  break-inside: avoid;
+  background: #fff;
+}
+.marker img {
+  width: 100%;
+  max-width: 260px;
+  image-rendering: pixelated;
+}
+.marker figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+.markerCode {
+  font: 800 2.2em var(--lefi-font-mono);
+  letter-spacing: 0.06em;
+}
+.markerName {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+.analysis {
+  margin-top: 10px;
+}
+.findings {
+  margin: 6px 0 10px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Printing zone markers: only the sheet. */
+@media print {
+  :global(body *) {
+    visibility: hidden;
+  }
+  :global([data-print-area]),
+  :global([data-print-area] *) {
+    visibility: visible;
+  }
+  :global([data-print-area]) {
+    position: absolute;
+    inset: 0;
+  }
+  .marker {
+    border-color: #999;
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/heartbeat.v1.schema.json",
+  "title": "Device heartbeat v1",
+  "description": "Topic lefi/v1/devices/{device_id}/heartbeat. QoS 0, not retained. Health of the board and its network, every 10 s (any period is accepted). No sensor values. Every field after firmware is optional and was added on 2026-11-09 (ADR-059): counters count since boot; the firmware only reports facts, Lefi Brain decides what is unstable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "device_id",
+    "boot_id",
+    "seq",
+    "uptime_ms",
+    "origin"
+  ],
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "device_id": {
+      "$ref": "common.v1.schema.json#/$defs/device_id"
+    },
+    "boot_id": {
+      "$ref": "common.v1.schema.json#/$defs/boot_id"
+    },
+    "seq": {
+      "$ref": "common.v1.schema.json#/$defs/seq"
+    },
+    "uptime_ms": {
+      "$ref": "common.v1.schema.json#/$defs/uptime_ms"
+    },
+    "origin": {
+      "$ref": "common.v1.schema.json#/$defs/origin"
+    },
+    "rssi_dbm": {
+      "type": "integer",
+      "minimum": -127,
+      "maximum": 0
+    },
+    "free_heap": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "firmware": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "min_free_heap": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "ESP.getMinFreeHeap(): lowest free heap since boot"
+    },
+    "reset_reason": {
+      "enum": [
+        "power_on",
+        "software",
+        "panic",
+        "watchdog",
+        "brownout",
+        "deep_sleep",
+        "other"
+      ],
+      "description": "Why the board last restarted"
+    },
+    "wifi_channel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 14
+    },
+    "wifi_reconnects": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Wi-Fi drops since boot"
+    },
+    "wifi_last_reason": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Last ESP-IDF WIFI_REASON_* disconnect code (e.g. 201 = no AP found)"
+    },
+    "mqtt_reconnects": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "MQTT reconnections since boot"
+    },
+    "mqtt_last_rc": {
+      "type": "integer",
+      "minimum": -32768,
+      "maximum": 32767,
+      "description": "Last MQTT connect return code (4/5 = credentials refused)"
+    },
+    "telemetry_sent": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "telemetry_failed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Publishes that failed while connected"
+    },
+    "telemetry_skipped_offline": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Read cycles not sent because MQTT was down (never sent later)"
+    },
+    "max_loop_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Slowest loop() in this interval"
+    },
+    "ip": {
+      "type": "string",
+      "format": "ipv4",
+      "maxLength": 15
+    }
+  }
+}

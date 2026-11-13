@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-backup-set-disk"
+description = "Enables the backup_set_disk command without any pre-configured scope."
+commands.allow = ["backup_set_disk"]
+
+[[permission]]
+identifier = "deny-backup-set-disk"
+description = "Denies the backup_set_disk command without any pre-configured scope."
+commands.deny = ["backup_set_disk"]

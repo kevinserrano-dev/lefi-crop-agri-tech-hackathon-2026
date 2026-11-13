@@ -1,0 +1,24 @@
+{
+  "name": "@lefi/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "gen": "cd ../../services/brain && LEFI_STATE_DIR=\"$(mktemp -d)\" uv run python -m lefi_brain openapi > ../../packages/api/openapi/brain.openapi.json && cd ../../packages/api && openapi-typescript openapi/brain.openapi.json --default-non-nullable=false -o src/generated/brain.ts && prettier --write src/generated/brain.ts",
+    "gen:types": "openapi-typescript openapi/brain.openapi.json --default-non-nullable=false -o src/generated/brain.ts && prettier --write src/generated/brain.ts"
+  },
+  "dependencies": {
+    "@lefi/platform": "workspace:*",
+    "@lefi/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.0.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.13.0"
+  }
+}

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-fleet-start-service"
+description = "Enables the fleet_start_service command without any pre-configured scope."
+commands.allow = ["fleet_start_service"]
+
+[[permission]]
+identifier = "deny-fleet-start-service"
+description = "Denies the fleet_start_service command without any pre-configured scope."
+commands.deny = ["fleet_start_service"]

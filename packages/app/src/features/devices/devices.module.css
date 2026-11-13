@@ -1,0 +1,450 @@
+.muted {
+  font-size: 12.5px;
+  color: var(--lefi-text-secondary);
+}
+.mono {
+  font: 500 11.5px var(--lefi-font-mono);
+}
+.grow {
+  flex: 1;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.statusSelect {
+  height: 36px;
+  border-radius: var(--lefi-radius-md);
+  font-size: 13px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1279px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Table cells */
+.idCell {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  min-width: 0;
+}
+.catIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--lefi-surface-sunken);
+  color: var(--lefi-forest-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--lefi-font-icon);
+  font-size: 18px;
+  line-height: 1;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.devId {
+  font: 500 12px var(--lefi-font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.ellipsisStrong,
+.ellipsisMuted {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellipsisStrong {
+  font-weight: 600;
+}
+.ellipsisMuted {
+  font-size: 11px;
+  color: var(--lefi-text-muted);
+}
+.health,
+.healthLarge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.healthTrack {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--lefi-off-bg);
+  overflow: hidden;
+}
+.healthTrack div {
+  height: 100%;
+}
+.health span {
+  font: 500 11.5px var(--lefi-font-mono);
+  width: 22px;
+  text-align: right;
+}
+.healthLarge {
+  gap: 10px;
+}
+.healthLarge .healthTrack {
+  height: 8px;
+  border-radius: 4px;
+}
+.healthLarge span {
+  font: 600 18px var(--lefi-font-display);
+}
+.due {
+  font-size: 12px;
+  font-weight: 700;
+}
+.modePill {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.modeIcon {
+  font-family: var(--lefi-font-icon);
+  font-size: 14px;
+  line-height: 1;
+}
+.none {
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--lefi-text-muted);
+  border-top: 1px solid var(--lefi-border-soft);
+}
+
+/* Detail panel */
+.panel {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.panelHead {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.panelIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--lefi-green-50);
+  color: var(--lefi-forest-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--lefi-font-icon);
+  font-size: 24px;
+  line-height: 1;
+}
+.panelTitle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.panelId {
+  font: 600 16px var(--lefi-font-mono);
+  word-break: break-all;
+}
+.statusPill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.simNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--lefi-sim-fg);
+  margin-top: -8px;
+}
+.pending {
+  display: flex;
+  gap: 10px;
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+  border-radius: 12px;
+  padding: 12px;
+}
+.pending > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+}
+.modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.mode {
+  text-align: left;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px;
+  border-radius: var(--lefi-radius-md);
+  border: 1.5px solid var(--lefi-border-control);
+  background: #fff;
+  cursor: pointer;
+}
+.mode[data-locked='true'] {
+  opacity: 0.55;
+}
+.modeText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.modeText b {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--lefi-text-strong);
+}
+.modeText span {
+  font-size: 11px;
+  color: var(--lefi-text-secondary);
+  line-height: 1.35;
+}
+.effect {
+  font-size: 12.5px;
+  color: var(--lefi-text-strong);
+  line-height: 1.5;
+  background: var(--lefi-surface-muted);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+  text-wrap: pretty;
+}
+.power {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--lefi-text-secondary);
+  flex-wrap: wrap;
+}
+.power b {
+  color: var(--lefi-text);
+}
+.power em {
+  font-style: normal;
+  color: var(--lefi-text-faint);
+}
+.actuatorNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lefi-off-fg);
+  background: var(--lefi-off-bg);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.serviceGrid div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--lefi-surface-muted);
+  border-radius: var(--lefi-radius-md);
+  padding: 8px 10px;
+}
+.serviceGrid span,
+.facts span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lefi-text-muted);
+}
+.serviceGrid b {
+  font-size: 12.5px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+}
+.facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.facts b {
+  font-size: 12.5px;
+  font-weight: 600;
+  word-break: break-word;
+}
+.histRow {
+  display: flex;
+  gap: 10px;
+  font-size: 12.5px;
+  padding-top: 6px;
+  border-top: 1px solid var(--lefi-border-row);
+}
+.histRow .mono {
+  color: var(--lefi-text-muted);
+  width: 52px;
+  flex-shrink: 0;
+}
+.robotBtn {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #dcd2f0;
+  border-radius: var(--lefi-radius-md);
+  background: #f3effa;
+  color: var(--lefi-sim-fg);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Register dialog */
+.dialogHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.dialogHead > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dialogTitle {
+  font: 600 21px var(--lefi-font-display);
+}
+.close {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--lefi-text-muted);
+}
+.methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.method {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border-radius: var(--lefi-radius-lg);
+  border: 1.5px solid var(--lefi-border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--lefi-text-secondary);
+  line-height: 1.5;
+}
+.method b {
+  font-size: 15px;
+  color: var(--lefi-text);
+}
+.method:hover:not(:disabled) {
+  border-color: var(--lefi-green-400);
+}
+.method:disabled {
+  cursor: not-allowed;
+  background: var(--lefi-surface-muted);
+}
+.infoNote {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 12.5px;
+  color: var(--lefi-info-fg);
+  background: var(--lefi-info-bg);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+.regForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.regGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.dialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

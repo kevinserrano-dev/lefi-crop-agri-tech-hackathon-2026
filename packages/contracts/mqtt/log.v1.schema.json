@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/log.v1.schema.json",
+  "title": "Device log lines v1",
+  "description": "Topic lefi/v1/devices/{device_id}/logs. QoS 0, not retained (ADR-060). What the board prints on its Serial Monitor, for Lefi Desktop's 'Board log': batched (up to 20 lines, sent every 2 s or when full), only lines at or above the board's remote log level (compile-time, default info). Diagnostic only: never parsed for data, never used by rules, kept by Lefi Brain in memory (last 500 lines per device). Never contains passwords or keys.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "device_id",
+    "boot_id",
+    "seq",
+    "uptime_ms",
+    "origin",
+    "lines"
+  ],
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "device_id": {
+      "$ref": "common.v1.schema.json#/$defs/device_id"
+    },
+    "boot_id": {
+      "$ref": "common.v1.schema.json#/$defs/boot_id"
+    },
+    "seq": {
+      "$ref": "common.v1.schema.json#/$defs/seq"
+    },
+    "uptime_ms": {
+      "$ref": "common.v1.schema.json#/$defs/uptime_ms"
+    },
+    "origin": {
+      "$ref": "common.v1.schema.json#/$defs/origin"
+    },
+    "dropped": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Lines lost since the previous batch (buffer full or MQTT down)"
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "t",
+          "level",
+          "msg"
+        ],
+        "properties": {
+          "t": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "uptime_ms when the line was written"
+          },
+          "level": {
+            "enum": [
+              "debug",
+              "info",
+              "warn",
+              "error"
+            ]
+          },
+          "tag": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,15}$",
+            "description": "wifi, mqtt, sensors, enrol, setup…"
+          },
+          "msg": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          }
+        }
+      }
+    }
+  }
+}

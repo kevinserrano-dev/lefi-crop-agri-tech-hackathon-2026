@@ -1,0 +1,164 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: var(--lefi-radius-lg, 14px);
+  background: var(--lefi-surface, #fff);
+  border: 1px solid var(--lefi-border, #e5e7eb);
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.title,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.muted {
+  color: var(--lefi-text-muted, #6b7280);
+  font-size: 13px;
+}
+.faint {
+  color: var(--lefi-text-muted, #9ca3af);
+  font-size: 12px;
+}
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--lefi-text-muted, #6b7280);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.crops {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--lefi-text-muted, #6b7280);
+  padding: 4px 6px;
+}
+.table td {
+  padding: 6px;
+  border-top: 1px solid var(--lefi-border, #eef0f2);
+}
+.findings,
+.recs,
+.ai {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.recs ul,
+.ai ul,
+.points {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.points {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.points li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.ai {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--lefi-info-bg, #eef4ff);
+}
+.ai p {
+  margin: 0;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--lefi-border, #eef0f2);
+}
+.row:first-of-type {
+  border-top: 0;
+}
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Lefi AI's analyses of alerts (ADR-092). */
+.insights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.insight {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--lefi-radius-md, 10px);
+  border: 1px solid var(--lefi-border, #e5e7eb);
+  background: var(--lefi-surface-2, #fafbfc);
+  font-size: 13px;
+}
+.diagnosis {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.insightGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+}

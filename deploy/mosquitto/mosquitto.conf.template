@@ -1,0 +1,18 @@
+# LEFI CROP — Mosquitto broker config. Rendered by scripts/install.sh into
+# {{STATE_DIR}}/mosquitto/mosquitto.conf. Do not put secrets here.
+per_listener_settings false
+# Run as the installing user (prevents a privilege drop to "mosquitto" when started as root).
+user {{RUN_USER}}
+listener {{MQTT_PORT}} {{MQTT_BIND}}
+allow_anonymous false
+password_file {{STATE_DIR}}/mosquitto/passwd
+acl_file {{STATE_DIR}}/mosquitto/acl
+persistence true
+persistence_location {{STATE_DIR}}/mosquitto/data/
+log_dest file {{STATE_DIR}}/mosquitto/log/mosquitto.log
+log_type error
+log_type warning
+log_type notice
+connection_messages true
+max_inflight_messages 20
+max_packet_size 65536

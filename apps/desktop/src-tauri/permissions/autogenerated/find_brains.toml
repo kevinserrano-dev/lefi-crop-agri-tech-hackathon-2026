@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-find-brains"
+description = "Enables the find_brains command without any pre-configured scope."
+commands.allow = ["find_brains"]
+
+[[permission]]
+identifier = "deny-find-brains"
+description = "Denies the find_brains command without any pre-configured scope."
+commands.deny = ["find_brains"]

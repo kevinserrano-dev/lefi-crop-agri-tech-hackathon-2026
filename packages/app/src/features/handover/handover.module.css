@@ -1,0 +1,224 @@
+.faint {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.grow {
+  flex: 1;
+}
+.ok {
+  color: #54b985;
+}
+.warn {
+  color: #e0a21b;
+}
+.header {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.party {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.partyText {
+  display: flex;
+  flex-direction: column;
+}
+.partyName {
+  font-size: 13px;
+  font-weight: 700;
+}
+.arrow {
+  color: var(--lefi-text-muted);
+}
+.signed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1f7a4d;
+  background: #e4f4ea;
+  padding: 8px 12px;
+  border-radius: 9px;
+}
+.acked {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1f7a4d;
+}
+.summary {
+  background: linear-gradient(180deg, #f1f8f3, #fff 75%);
+  border: 1px solid #d6e9dc;
+  border-radius: 18px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.mascot {
+  width: 120px;
+  height: auto;
+}
+.summaryBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.summaryHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.summaryTitle {
+  font: 600 20px var(--lefi-font-display);
+}
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.blockLabel {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2e6b57;
+}
+.blockLabel[data-warn='true'] {
+  color: #8a5a00;
+}
+.prose {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+.line {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.cardTitle {
+  font: 600 16px var(--lefi-font-display);
+}
+.kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  padding-top: 8px;
+  border-top: 1px solid var(--lefi-border-row);
+}
+.kv b {
+  text-align: right;
+}
+.kvLabel {
+  color: var(--lefi-text-secondary);
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--lefi-border-row);
+  font: inherit;
+  font-size: 12.5px;
+  color: inherit;
+}
+button.row {
+  cursor: pointer;
+}
+button.row:hover .rowTitle {
+  text-decoration: underline;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mono {
+  font-family: var(--lefi-font-mono);
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+  white-space: nowrap;
+}
+.rowTitle {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+.pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.mission {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 8px;
+  border-top: 1px solid var(--lefi-border-row);
+  font-size: 12.5px;
+}
+.missionHead {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.missionText {
+  color: var(--lefi-text-secondary);
+  line-height: 1.45;
+  font-size: 12px;
+}
+
+/* Sign / acknowledge dialog (ADR-095). */
+.noteForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+.noteForm h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.noteButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

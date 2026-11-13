@@ -1,0 +1,37 @@
+{
+  "name": "lefi-crop-ai",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @lefi/desktop dev",
+    "dev:desktop": "pnpm --filter @lefi/desktop tauri dev --config src-tauri/tauri.dev.conf.json",
+    "dev:helper": "pnpm --filter @lefi/helper tauri dev",
+    "build": "pnpm --filter @lefi/desktop build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "build:helper": "pnpm --filter @lefi/helper build"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.0.0",
+    "typescript-eslint": "^8.72.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "prettier": "^3.6.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0",
+    "jsdom": "^30.1.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^22.0.0"
+  }
+}

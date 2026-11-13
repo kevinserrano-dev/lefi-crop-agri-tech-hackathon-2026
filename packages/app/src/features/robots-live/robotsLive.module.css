@@ -1,0 +1,541 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--lefi-radius-xl);
+  background: var(--lefi-sim-bg);
+  color: var(--lefi-sim-fg);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+}
+.simTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 12px 16px;
+}
+.robotId {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.robotId > div {
+  display: flex;
+  flex-direction: column;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 80px;
+}
+.stopBtn {
+  margin-left: auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--lefi-border);
+  border-radius: var(--lefi-radius-xl);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lefi-text-muted);
+}
+.muted {
+  font-size: 12.5px;
+  color: var(--lefi-text-secondary);
+}
+.faint {
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.mono {
+  font: 500 11.5px var(--lefi-font-mono);
+}
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rowBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.err {
+  font-size: 12px;
+  color: var(--lefi-crit-fg);
+}
+.tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--lefi-surface-muted);
+  padding: 3px;
+  border-radius: 10px;
+}
+.tabs button {
+  border: 0;
+  background: transparent;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--lefi-text-secondary);
+  cursor: pointer;
+}
+.tabs button[aria-selected='true'] {
+  background: #fff;
+  color: var(--lefi-text-strong);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+}
+.video {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #0b1a22;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.simOverlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgb(232 197 71 / 0.92);
+  color: #2a2205;
+  font: 800 10.5px var(--lefi-font-mono);
+  letter-spacing: 0.08em;
+}
+.fps {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 0.55);
+  color: #fff;
+  font: 600 10.5px var(--lefi-font-mono);
+}
+.videoMsg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  color: #c9d6dd;
+  font-size: 13px;
+}
+.map {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+.mapLabel {
+  font: 700 0.14px var(--lefi-font-body);
+  fill: #cfe3d8;
+  pointer-events: none;
+}
+.station {
+  cursor: pointer;
+}
+.placeholder {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  color: var(--lefi-text-muted);
+  background: var(--lefi-surface-muted);
+  border-radius: 12px;
+}
+.legend {
+  display: flex;
+  gap: 14px;
+  font-size: 11.5px;
+  color: var(--lefi-text-muted);
+}
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+.stations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+.stationBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--lefi-border);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: left;
+}
+.stationBtn[aria-pressed='true'] {
+  border-color: var(--lefi-ok-fg);
+  background: var(--lefi-ok-bg);
+}
+.steps {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+.steps li {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--lefi-surface-muted);
+  color: var(--lefi-text-muted);
+}
+.steps li[data-state='done'] {
+  background: var(--lefi-ok-bg);
+  color: var(--lefi-ok-fg);
+}
+.steps li[data-state='now'] {
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+  outline: 2px solid currentColor;
+}
+.events,
+.log {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow: auto;
+}
+.events li,
+.log li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12.5px;
+}
+.cmdKind {
+  font: 700 12px var(--lefi-font-mono);
+  min-width: 48px;
+}
+.pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--lefi-surface-muted);
+  color: var(--lefi-text-secondary);
+  white-space: nowrap;
+}
+.ok {
+  background: var(--lefi-ok-bg);
+  color: var(--lefi-ok-fg);
+}
+.bad {
+  background: var(--lefi-crit-bg);
+  color: var(--lefi-crit-fg);
+}
+.warn {
+  background: var(--lefi-warn-bg);
+  color: var(--lefi-warn-fg);
+}
+.info {
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+}
+.history {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.historyItem {
+  border: 1px solid var(--lefi-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.photo {
+  margin: 0;
+  position: relative;
+}
+.photo img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+.photo figcaption {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: rgb(232 197 71 / 0.92);
+  font: 800 10px var(--lefi-font-mono);
+}
+/* The simulated robot as a device (ADR-090) */
+.addRobot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 20px 12px;
+}
+.places {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.place {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--lefi-border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.place[data-disabled='true'] {
+  cursor: not-allowed;
+  background: var(--lefi-surface-muted);
+  opacity: 0.8;
+}
+.place:has(input:checked) {
+  border-color: var(--lefi-ok-fg);
+  background: var(--lefi-ok-bg);
+}
+.placeText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.checkRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+.note {
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+  border-radius: var(--lefi-radius-md);
+  padding: 10px 12px;
+  margin: 0;
+  font-size: 0.9em;
+}
+.dialogFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 20px 16px;
+}
+.robotCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+.robotId > span {
+  display: flex;
+  flex-direction: column;
+}
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--lefi-surface-muted);
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--lefi-ok-fg);
+  transition: width 0.4s ease;
+}
+.failed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--lefi-crit-bg);
+  color: var(--lefi-crit-fg);
+}
+.link2 {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.centerMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 16px;
+  text-align: center;
+}
+.powerBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--lefi-radius-xl);
+  background: var(--lefi-warn-bg);
+  color: var(--lefi-warn-fg);
+  font-size: 13px;
+}
+.powerBanner > button {
+  margin-left: auto;
+}
+
+/* Power state of the simulated robot, with what it is doing or why it is off (ADR-104). */
+.powerState {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--lefi-radius-xl);
+  font-size: 13px;
+}
+.powerState[data-tone='ok'] {
+  background: var(--lefi-ok-bg);
+  color: var(--lefi-ok-fg);
+}
+.powerState[data-tone='busy'] {
+  background: var(--lefi-info-bg);
+  color: var(--lefi-info-fg);
+}
+.powerState[data-tone='off'] {
+  background: var(--lefi-warn-bg);
+  color: var(--lefi-warn-fg);
+}
+.powerState[data-tone='bad'] {
+  background: var(--lefi-crit-bg);
+  color: var(--lefi-crit-fg);
+}
+.powerHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.powerActions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: robotSpin 0.8s linear infinite;
+}
+@keyframes robotSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.4s;
+  }
+}
+.logTail {
+  margin: 0;
+  max-height: 180px;
+  overflow: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--lefi-surface);
+  color: var(--lefi-text);
+  font-family: var(--lefi-font-mono, ui-monospace, monospace);
+  font-size: 11.5px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.logToggle {
+  align-self: flex-start;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

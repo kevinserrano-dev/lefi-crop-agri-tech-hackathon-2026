@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.leficrop.local/mqtt/announce.v1.schema.json",
+  "title": "Device announce v1",
+  "description": "Topic lefi/v1/devices/{device_id}/announce. QoS 1, retained. Published once per boot after connecting. Lists every channel of the node profile the firmware implements and what it detected on each; Lefi Brain compares it with the channels a technician enabled in Lefi Desktop (ADR-052). It never says which plant a sensor belongs to: that is assigned in Lefi Brain.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "device_id", "profile", "firmware", "boot_id", "origin", "channels"],
+  "properties": {
+    "v": { "const": 1 },
+    "device_id": { "$ref": "common.v1.schema.json#/$defs/device_id" },
+    "profile": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.v[0-9]+$",
+      "description": "Node profile id, e.g. lefi-node-esp32.v1."
+    },
+    "firmware": { "type": "string", "minLength": 1, "maxLength": 32 },
+    "mac": {
+      "type": "string",
+      "pattern": "^([0-9A-F]{2}:){5}[0-9A-F]{2}$",
+      "description": "Wi-Fi MAC, upper case."
+    },
+    "boot_id": { "$ref": "common.v1.schema.json#/$defs/boot_id" },
+    "origin": { "$ref": "common.v1.schema.json#/$defs/origin" },
+    "channels": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sensor_key", "detected"],
+        "properties": {
+          "sensor_key": { "$ref": "common.v1.schema.json#/$defs/sensor_key" },
+          "detected": {
+            "enum": [true, false, null],
+            "description": "true/false when the driver can tell (I2C ack, 1-Wire ROM found); null when it cannot (analog inputs)."
+          },
+          "detail": { "type": "string", "maxLength": 64 }
+        }
+      }
+    }
+  }
+}

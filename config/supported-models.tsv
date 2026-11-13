@@ -1,0 +1,8 @@
+# tag	provider	label	role	mem_gb	ctx	measured_on	notes
+# Owner-approved local models (ADR-019). Tab-separated. First non-comment row = default.
+# Availability of each tag is verified at install time with `ollama pull` + `ollama list`.
+# mem_gb / ctx / measured_on are MEASURED values (ADR-028): memory the loaded model occupies
+# (`ollama ps` / `lefi ai status`) at context `ctx`, and where/when it was measured.
+# Unknown = ? (the fit is then decided by the real benchmark after install). Never estimate.
+gemma4:12b	Google	Gemma 4 12B	default	7.4	4096	MacBook Pro 16" M1 Pro, 2026-11-02 (lefi ai bench)	Target model for the demo (MacBook Pro 16" M1 Pro)
+gemma4:e4b	Google	Gemma 4 E4B	fallback	?	?	?	Lighter option when memory is tight (not measured yet)

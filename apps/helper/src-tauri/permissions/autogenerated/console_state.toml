@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-console-state"
+description = "Enables the console_state command without any pre-configured scope."
+commands.allow = ["console_state"]
+
+[[permission]]
+identifier = "deny-console-state"
+description = "Denies the console_state command without any pre-configured scope."
+commands.deny = ["console_state"]

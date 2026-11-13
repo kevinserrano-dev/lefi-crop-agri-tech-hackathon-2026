@@ -1,0 +1,81 @@
+/* LEFI CROP design tokens — values taken from the design handoff
+   ("Lefi Crop Phase 2"). */
+:root {
+  /* Brand */
+  --lefi-forest-900: #14231d;
+  --lefi-forest-800: #163d32;
+  --lefi-forest-700: #1e4d3f;
+  --lefi-forest-600: #2e6b57;
+  --lefi-green-600: #2e8a5c;
+  --lefi-green-500: #2e9a63;
+  --lefi-green-400: #54b985;
+  --lefi-green-200: #9fd7b8;
+  --lefi-green-100: #dff0e5;
+  --lefi-green-50: #e6f3eb;
+  --lefi-green-25: #eef5f0;
+  --lefi-earth-700: #7a4a22;
+  --lefi-earth-100: #f4ebdf;
+  --lefi-violet-700: #5b3fa0;
+  --lefi-violet-100: #ede7f6;
+
+  /* Surfaces & lines */
+  --lefi-bg: #f7f9f6;
+  --lefi-surface: #ffffff;
+  --lefi-surface-muted: #f6f8f6;
+  --lefi-surface-sunken: #f1f4f1;
+  --lefi-skeleton: #edf1ee;
+  --lefi-border: #e3e9e4;
+  --lefi-border-soft: #eef2ef;
+  --lefi-border-row: #f0f3f0;
+  --lefi-border-input: #d5ded8;
+  --lefi-border-control: #dce3de;
+  --lefi-border-brand: #cfe3d6;
+
+  /* Text */
+  --lefi-text: #14231d;
+  --lefi-text-body: #1c2622;
+  --lefi-text-strong: #33413b;
+  --lefi-text-secondary: #5f6e67;
+  --lefi-text-muted: #6b7871;
+  --lefi-text-faint: #8a968f;
+
+  /* Status tones (fg / bg / dot) */
+  --lefi-ok-fg: #1f7a4d;
+  --lefi-ok-bg: #e4f4ea;
+  --lefi-ok-dot: #54b985;
+  --lefi-warn-fg: #8a5a00;
+  --lefi-warn-bg: #fcf0d6;
+  --lefi-warn-dot: #e0a21b;
+  --lefi-crit-fg: #a12f2f;
+  --lefi-crit-bg: #fbe4e2;
+  --lefi-crit-dot: #d64545;
+  --lefi-off-fg: #5e6b65;
+  --lefi-off-bg: #eef1ee;
+  --lefi-off-dot: #9aa6a0;
+  --lefi-info-fg: #1e5c8a;
+  --lefi-info-bg: #e3eef7;
+  --lefi-info-dot: #3c84c0;
+  --lefi-sim-fg: #5b3fa0;
+  --lefi-sim-bg: #ede7f6;
+  --lefi-sim-dot: #7b5fc0;
+
+  /* Typography */
+  --lefi-font-display: 'Outfit', system-ui, sans-serif;
+  --lefi-font-body: 'Manrope', system-ui, sans-serif;
+  --lefi-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --lefi-font-icon: 'Material Symbols Rounded';
+
+  /* Shape & elevation */
+  --lefi-radius-sm: 6px;
+  --lefi-radius-md: 10px;
+  --lefi-radius-lg: 14px;
+  --lefi-radius-xl: 16px;
+  --lefi-radius-pill: 999px;
+  --lefi-shadow-pop: 0 16px 40px rgba(22, 61, 50, 0.14);
+
+  /* Layout */
+  --lefi-sidebar-w: 256px;
+  --lefi-sidebar-w-collapsed: 72px;
+  --lefi-topbar-h: 68px;
+  --lefi-content-max: 1640px;
+}

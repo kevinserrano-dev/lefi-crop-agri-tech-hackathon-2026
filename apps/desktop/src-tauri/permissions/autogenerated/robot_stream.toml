@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-robot-stream"
+description = "Enables the robot_stream command without any pre-configured scope."
+commands.allow = ["robot_stream"]
+
+[[permission]]
+identifier = "deny-robot-stream"
+description = "Denies the robot_stream command without any pre-configured scope."
+commands.deny = ["robot_stream"]
